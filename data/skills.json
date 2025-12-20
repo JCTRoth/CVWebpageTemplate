@@ -1,0 +1,12 @@
+{
+  "groups": [
+    ["C#", "WPF", "ASP.NET Core", "EF Core", ".NET MAUI", "SignalR", "Restful API", "MVVM"],
+    ["Java", "JavaEE2", "Spring","Spring Boot", "Hibernate", "Gradle", "GraalJs"],
+    ["TypeScript", "React", "Tailwind CSS", "Bootstrap", "CSS", "JavaScript", "Vite"],
+    ["C++","C", "Qt"],
+    ["Python", "Flask", "SQLAlchemy"],
+    ["PostgreSQL", "MySQL", "SQLite", "MongoDB", "GraphQL", "Entity Framework"],
+    ["DevOps", "Git", "CI/CD", "CMake", "Docker", "Firebase"],
+    ["Arduino", "Raspberry Pi", "IoT"]
+  ]
+}

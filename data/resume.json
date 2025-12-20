@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "name": "Jonas Roth",
+    "title": "Full Stack Developer",
+    "email": "jonasroth@mailbase.info",
+    "phone": "+49 17692617518",
+    "skills": {
+      "Front-End": ["React", "TypeScript", "Tailwind CSS", "Bootstrap", "CSS", "JavaScript", "HTML", "Vite"],
+      "Backend": ["Java", "JavaEE2", "Spring", "Spring Boot", "Hibernate", "Gradle"],
+      "Mobile": [],
+      "Databases": ["PostgreSQL", "MySQL", "SQLite", "MongoDB", "GraphQL", "Entity Framework"],
+      "DevOps": ["Git", "CI/CD", "CMake", "Docker", "Firebase"],
+      "Project Management": ["ServiceNow"]
+    }
+  },
+  "work": [
+    {
+      "startYear": "08.2021",
+      "endYear": "Present",
+      "position": "Full Stack Developer",
+      "company": "Schenck Process / Qlar",
+      "type": "Full-time",
+      "company_image": "placeholder_company_2.jpg",
+      "bullets": [
+        "Further development of the complex ERP system LOGiQ",
+        "Clarification and planning of customer processes in the logistics industry",
+        "Backend – Java, Spring, Microservices",
+        "Frontend development – React, TypeScript",
+        "Interfaces/APIs – REST/SOAP, file interfaces, device interfaces",
+        "Database schema extensions – PostgreSQL, Hibernate",
+        "Management of the CI/CD process in GitLab",
+        "Orchestration of complex container landscapes in Docker Swarm",
+        "Software planning – interaction of various microservices, standardization of software"
+      ]
+    },
+    {
+      "startYear": "09.2018",
+      "endYear": "11.2019",
+      "position": "ServiceNow Consultant",
+      "company": "WSP-Consulting GmbH",
+      "type": "Full-time",
+      "company_image": "placeholder_company_1.jpg",
+      "bullets": [
+        "Direct consulting and collaboration with customers",
+        "Interface implementation",
+        "Web UI adaptations to customer requirements",
+        "Customization of business processes in ServiceNow"
+      ]
+    },
+    {
+      "startYear": "03.2018",
+      "endYear": "09.2018",
+      "position": "Freelance web designer",
+      "company": "Freelance",
+      "type": "Freelance",
+      "company_image": "placeholder_company_1.jpg",
+      "bullets": [
+        "Creation of websites in JavaScript / TypeScript / PHP",
+        "WordPress",
+        "A selection can be found at www.mailbase.info"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "startYear": "01.2016",
+      "endYear": "03.2017",
+      "position": "Tutor and Software Developer",
+      "company": "[Darmstadt University of Applied Sciences](https://h-da.de)",
+      "company_image": "placeholder_uni_2.jpg",
+      "bullets": [
+        "Software development and tutor for “WheelScout”",
+        "Planning the redevelopment of the software, including the web interface and app",
+        "Supporting bachelor's and master's students in working groups",
+        "[Publication of a scientific paper on WheelScout as part of the “IntelliSys” conference 2016](https://books.google.de/books?id=WtsxDwAAQBAJ&lpg=PA1056&ots=PxjufENNEN&dq=%22jonasroth%40mailbase.info%22&hl=de&pg=PA1056#v=onepage&q&f=false)"
+      ]
+    }
+  ]
+}
