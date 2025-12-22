@@ -5,8 +5,13 @@
  * Supports basic AsciiDoc syntax for project documentation.
  */
 
+type ReplacementRule = {
+  pattern: RegExp;
+  replacement: string | ((match: string, ...args: string[]) => string);
+};
+
 // Basic AsciiDoc to HTML conversion rules
-const ADOC_RULES = [
+const ADOC_RULES: ReplacementRule[] = [
   // Headers
   { pattern: /^= (.+)$/gm, replacement: '<h1>$1</h1>' },
   { pattern: /^== (.+)$/gm, replacement: '<h2>$1</h2>' },
@@ -30,7 +35,8 @@ const ADOC_RULES = [
   { pattern: /^\* (.+)$/gm, replacement: '<li>$1</li>' },
   
   // Paragraphs (simple approach)
-  { pattern: /^(.+)$/gm, replacement: (match, p1) => {
+  { pattern: /^(.+)$/gm, replacement: (match: string, ...args: string[]) => {
+    const p1 = args[0];
     if (!match.trim().startsWith('<') && !match.trim().startsWith('*')) {
       return `<p>${p1}</p>`;
     }
@@ -47,7 +53,7 @@ export function convertAsciiDocToHtml(adocContent: string): string {
   
   // Apply all conversion rules
   ADOC_RULES.forEach(rule => {
-    html = html.replace(rule.pattern, rule.replacement);
+    html = html.replace(rule.pattern, rule.replacement as any);
   });
   
   // Wrap unordered list items in <ul> tags

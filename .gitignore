@@ -105,3 +105,5 @@ temp/
 
 # Ignore all git projects in a specific folder
 git_projects/
+# Resume is after npm run dist there
+data/

@@ -142,7 +142,7 @@ const ProjectDetail: React.FC = () => {
                     ) : null}
 
                     {/* Fallback to plain description while markdown loads or if none provided */}
-                    {markdownUrl ? (
+                    {docUrl ? (
                         // Two-column layout on large screens; on small, CodeStats appears first below the title
                         <div className="" >
                             <div className="flex flex-col lg:flex-row items-center gap-6">
@@ -150,7 +150,7 @@ const ProjectDetail: React.FC = () => {
                                     <CodeStats
                                         clocData={cloc}
                                         languageMapping={clocLanguageMapping as Record<string, string>}
-                                        overrides={project['cloc-mapping-overwrite']}
+                                        overrides={(project as any)['cloc-mapping-overwrite'] as Record<string, string>}
                                         defaultCollapsed={!isLg}
                                     />
                                 </aside>
