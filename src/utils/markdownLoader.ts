@@ -31,8 +31,8 @@ try {
   // In Vite, this will be statically analyzed and replaced.
   // Note: two globs - one for raw content, one for asset URLs (if needed later)
   // @ts-ignore
-  // Load ALL markdown files under src/data (including projects subfolders)
-  const raw = import.meta.glob('../data/**/*.md', { query: '?raw', import: 'default', eager: true });
+  // Load ALL markdown and asciidoc files under src/data (including projects subfolders)
+  const raw = import.meta.glob('../data/**/*.{md,adoc,asciidoc}', { query: '?raw', import: 'default', eager: true });
   viteMdModules = raw as Record<string, string>;
 } catch {
   viteMdModules = null;
@@ -46,7 +46,7 @@ let reqCtx: any = null;
 try {
   if (!viteMdModules && typeof require !== 'undefined' && require.context) {
     // Fallback for Webpack/CRA: search under data and its subfolders
-    reqCtx = require.context('../data', true, /\.md$/);
+    reqCtx = require.context('../data', true, /\.(md|adoc|asciidoc)$/);
   }
 } catch {
   reqCtx = null;
@@ -68,7 +68,7 @@ function resolveLocalKey(markdownUrl: string): string | null {
     // If path doesn't start with data/, assume it refers to a file in data/
     key = `data/${key}`;
   }
-  if (!key.toLowerCase().endsWith('.md')) return null;
+  if (!key.toLowerCase().match(/\.(md|adoc|asciidoc)$/)) return null;
 
   if (viteMdModules) {
     const keys = Object.keys(viteMdModules);

@@ -21,8 +21,8 @@ const Projects: React.FC = () => {
             <div className="flex flex-col lg:flex-row gap-6 items-start">
                 {/* AllCodeStats should be on top and centered on small screens, after on large screens */}
                 <aside className="order-1 lg:order-2 w-full lg:w-auto flex justify-center lg:justify-start flex-shrink-0 lg:self-start lg:sticky lg:top-4">
-                    {/* Collapsed by default on small; expanded on lg */}
-                    <AllCodeStats defaultCollapsed={!isLg} />
+                    {/* Expanded by default on all screen sizes */}
+                    <AllCodeStats defaultCollapsed={false} />
                 </aside>
                 <div className="order-2 lg:order-1 flex-1 min-w-0">
                     <ProjectList projects={(projectsData as any).projects} />

@@ -1,71 +1,41 @@
 /**
  * AsciiDoc Loader
- * 
- * Lightweight AsciiDoc to HTML converter for CV webpage.
- * Supports basic AsciiDoc syntax for project documentation.
+ *
+ * Uses the asciidoctor library for proper AsciiDoc to HTML conversion.
+ * Supports full AsciiDoc syntax for project documentation.
  */
 
-type ReplacementRule = {
-  pattern: RegExp;
-  replacement: string | ((match: string, ...args: string[]) => string);
-};
+import AsciiDoctor from 'asciidoctor';
 
-// Basic AsciiDoc to HTML conversion rules
-const ADOC_RULES: ReplacementRule[] = [
-  // Headers
-  { pattern: /^= (.+)$/gm, replacement: '<h1>$1</h1>' },
-  { pattern: /^== (.+)$/gm, replacement: '<h2>$1</h2>' },
-  { pattern: /^=== (.+)$/gm, replacement: '<h3>$1</h3>' },
-  { pattern: /^==== (.+)$/gm, replacement: '<h4>$1</h4>' },
-  
-  // Bold and italic
-  { pattern: /\*\*(.+?)\*\*/g, replacement: '<strong>$1</strong>' },
-  { pattern: /\*(.+?)\*/g, replacement: '<em>$1</em>' },
-  
-  // Monospace
-  { pattern: /`(.+?)`/g, replacement: '<code>$1</code>' },
-  
-  // Links
-  { pattern: /link:(.+?)\[(.+?)\]/g, replacement: '<a href="$1">$2</a>' },
-  
-  // Images
-  { pattern: /image::(.+?)\[(.+?)\]/g, replacement: '<img src="$1" alt="$2" />' },
-  
-  // Unordered lists
-  { pattern: /^\* (.+)$/gm, replacement: '<li>$1</li>' },
-  
-  // Paragraphs (simple approach)
-  { pattern: /^(.+)$/gm, replacement: (match: string, ...args: string[]) => {
-    const p1 = args[0];
-    if (!match.trim().startsWith('<') && !match.trim().startsWith('*')) {
-      return `<p>${p1}</p>`;
-    }
-    return match;
-  }}
-];
+const asciidoctor = AsciiDoctor();
 
 export function convertAsciiDocToHtml(adocContent: string): string {
   if (!adocContent || typeof adocContent !== 'string') {
     return '';
   }
-  
-  let html = adocContent;
-  
-  // Apply all conversion rules
-  ADOC_RULES.forEach(rule => {
-    html = html.replace(rule.pattern, rule.replacement as any);
-  });
-  
-  // Wrap unordered list items in <ul> tags
-  html = html.replace(/<li>(.*?)<\/li>/g, (match) => {
-    if (!html.includes('<ul>')) {
-      return `<ul>${match}</ul>`;
-    }
-    return match;
-  });
-  
-  // Basic HTML structure
-  return `<div class="adoc-content">${html}</div>`;
+
+  try {
+    // Convert AsciiDoc to HTML using asciidoctor
+    const html = asciidoctor.convert(adocContent, {
+      // Basic options for HTML5 output
+      attributes: {
+        'showtitle': false,  // Don't show document title as it's already shown in the page header
+        'toc': false,       // TOC is handled by the page layout
+        'sectanchors': false,
+        'sectlinks': true,
+        'hardbreaks': false,
+      },
+      // Safe mode for client-side conversion
+      safe: 'safe',
+      // HTML5 output
+      backend: 'html5',
+    });
+
+    return html as string;
+  } catch (error) {
+    console.warn('Error converting AsciiDoc:', error);
+    return `<div class="error">Error converting AsciiDoc content</div>`;
+  }
 }
 
 export function isAsciiDocFile(filename: string): boolean {
