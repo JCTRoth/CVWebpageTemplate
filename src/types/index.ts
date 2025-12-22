@@ -17,11 +17,18 @@ export interface Project {
     /** Flexible end date, same formats as date_from; can also be the literal "today" */
     date_to?: string;
     /**
-     * Optional URL to markdown content for detailed project description.
+     * Optional URL to documentation content for detailed project description.
      * Can be:
      * - A relative path to a local markdown file within src (e.g., 
      *   "/src/data/projects/<project-id>/README.md" or "./data/projects/<project-id>/README.md")
+     * - A relative path to a local AsciiDoc file (e.g., 
+     *   "/src/data/projects/<project-id>/README.adoc")
      * - A public URL (e.g., a GitHub README URL)
+     * Supports both .md (Markdown) and .adoc/.asciidoc (AsciiDoc) files
+     */
+    docUrl?: string;
+    /**
+     * @deprecated Use docUrl instead (supports both Markdown and AsciiDoc)
      */
     markdownUrl?: string;
 }

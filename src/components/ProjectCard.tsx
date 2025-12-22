@@ -45,13 +45,13 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     // Derive folder from markdownUrl to match how ProjectDetail resolves cloc.json
     // Derive total LOC; if project lacks markdown or cloc file we simply omit the badge (no placeholder shown).
     const totalLoc = React.useMemo(() => {
-        const md = project.markdownUrl;
-        if (!md) return null;
-        const m = md.match(/src\/data\/projects\/([^/]+)\//i);
+        const docUrl = project.docUrl || project.markdownUrl;
+        if (!docUrl) return null;
+        const m = docUrl.match(/src\/data\/projects\/([^/]+)\//i);
         const folder = m?.[1];
         if (!folder) return null;
         return locMap[folder] ?? null;
-    }, [project.markdownUrl, locMap]);
+    }, [project.docUrl, project.markdownUrl, locMap]);
 
     React.useEffect(() => {
         const v = videoRef.current;

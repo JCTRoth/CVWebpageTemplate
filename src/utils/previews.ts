@@ -73,7 +73,7 @@ export function getProjectPreviewUrl(project: Project): string | undefined {
   if (!previewEntries.length) return undefined;
 
   // 1) If project has a local markdownUrl, try to use its directory
-  const mdDir = dirFromMarkdownUrl(project.markdownUrl ?? '');
+  const mdDir = dirFromMarkdownUrl(project.docUrl || project.markdownUrl || '');
   if (mdDir) {
     const match = previewEntries.find((e) => e.dir.toLowerCase().endsWith(mdDir.toLowerCase()));
     if (match) return match.url;
@@ -96,7 +96,7 @@ export function getProjectPreviewVideoSources(project: Project): ProjectPreviewV
   if (!previewVideoEntries.length) return [];
 
   // 1) Try to resolve by markdown directory (local paths only)
-  const mdDir = dirFromMarkdownUrl(project.markdownUrl ?? '');
+  const mdDir = dirFromMarkdownUrl(project.docUrl || project.markdownUrl || '');
   let matches: VideoEntry[] = [];
   if (mdDir) {
     matches = previewVideoEntries.filter((e) => e.dir.toLowerCase().endsWith(mdDir.toLowerCase()));

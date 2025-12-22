@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import projectsData from '../data/projects.json';
-import loadMarkdown, { getMarkdownAssetUrl } from '../utils/markdownLoader';
+import { loadDocumentation, getMarkdownAssetUrl } from '../utils/markdownLoader';
 import loadCloc from '../utils/clocLoader';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -34,13 +34,14 @@ const ProjectDetail: React.FC = () => {
     const [md, setMd] = React.useState<string>('');
     const [loading, setLoading] = React.useState<boolean>(false);
     const [cloc, setCloc] = React.useState<any | null>(null);
-    const markdownUrl = project?.markdownUrl;
-    // derive cloc.json path from markdown or project folder: expect cloc at src/data/projects/<Folder>/cloc.json
+    const docUrl = project?.docUrl || project?.markdownUrl;
+    // derive cloc.json path from docUrl or project folder: expect cloc at src/data/projects/<Folder>/cloc.json
     const clocUrl = React.useMemo(() => {
-        if (!project?.markdownUrl) return undefined;
-        // markdownUrl is like 'src/data/projects/CAE/README.md' => replace README.md with cloc.json
-        return project.markdownUrl.replace(/README\.md$/i, 'cloc.json');
-    }, [project]);
+        if (!docUrl) return undefined;
+        // Handle both .md and .adoc/.asciidoc files
+        const cleanedUrl = docUrl.replace(/README\.(md|adoc|asciidoc)$/i, 'cloc.json');
+        return cleanedUrl;
+    }, [docUrl]);
 
     // Scroll to top whenever this detail page mounts or the project id changes
     React.useEffect(() => {
@@ -56,9 +57,9 @@ const ProjectDetail: React.FC = () => {
     React.useEffect(() => {
         let mounted = true;
         async function run() {
-            if (!markdownUrl) return;
+            if (!docUrl) return;
             setLoading(true);
-            const text = await loadMarkdown(markdownUrl);
+            const text = await loadDocumentation(docUrl);
             if (mounted) {
                 setMd(text);
                 setLoading(false);
@@ -68,7 +69,7 @@ const ProjectDetail: React.FC = () => {
         return () => {
             mounted = false;
         };
-    }, [markdownUrl]);
+    }, [docUrl]);
 
     React.useEffect(() => {
         let mounted = true;
@@ -83,7 +84,7 @@ const ProjectDetail: React.FC = () => {
         };
     }, [clocUrl]);
 
-    const markdownComponents = useMarkdownComponents(markdownUrl || '');
+    const markdownComponents = useMarkdownComponents(docUrl || '');
 
     // Match AllCodeStats behavior: collapsed on small screens, expanded on lg
     const { width } = useWindowSize();

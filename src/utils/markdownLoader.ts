@@ -1,9 +1,17 @@
-// Lightweight loader that supports loading markdown either from:
+// Lightweight loader that supports loading documentation either from:
 // - a local path within src/data or src/data/projects (bundled as an asset)
 // - an external http(s) URL
-// Returns the markdown text or an empty string on failure.
+// Supports both Markdown (.md) and AsciiDoc (.adoc, .asciidoc) formats
+// Returns the HTML content or an empty string on failure.
 
 const isExternal = (url: string) => /^https?:\/\//i.test(url);
+
+// Import AsciiDoc utilities
+import {
+  convertAsciiDocToHtml,
+  isAsciiDocFile,
+  getFileExtension
+} from './asciidocLoader';
 
 // If a path points to something inside the public folder, normalize to a URL the browser can fetch.
 function toPublicPath(url: string): string | undefined {
@@ -115,47 +123,69 @@ export function getMarkdownAssetUrl(markdownUrl?: string): string | undefined {
   return pub;
 }
 
-export async function loadMarkdown(markdownUrl?: string): Promise<string> {
-  if (!markdownUrl) return '';
+export async function loadDocumentation(docUrl?: string): Promise<string> {
+  if (!docUrl) return '';
   try {
-    if (isExternal(markdownUrl)) {
-      const res = await fetch(markdownUrl);
+    const fileExtension = getFileExtension(docUrl);
+    const isAdoc = isAsciiDocFile(docUrl);
+    
+    if (isExternal(docUrl)) {
+      const res = await fetch(docUrl);
       if (!res.ok) return '';
       const ct = res.headers.get('content-type') || '';
-      // Only treat as markdown if not HTML
+      // Only treat as documentation if not HTML
       if (/text\/html/i.test(ct)) {
         return '';
       }
-      // Accept text/markdown, text/plain, or unknown types
-      return await res.text();
+      const content = await res.text();
+      
+      // Convert to HTML based on file type
+      if (isAdoc || fileExtension === 'adoc' || fileExtension === 'asciidoc') {
+        return convertAsciiDocToHtml(content);
+      }
+      // For markdown, return as-is (will be processed by react-markdown)
+      return content;
     }
 
-    const key = resolveLocalKey(markdownUrl);
+    const key = resolveLocalKey(docUrl);
+    let content = '';
+    
     if (viteMdModules && key && viteMdModules[key]) {
       // Vite eager raw content is already a string
-      return String(viteMdModules[key]);
+      content = String(viteMdModules[key]);
+    } else {
+      const assetUrl = getMarkdownAssetUrl(docUrl);
+      if (assetUrl) {
+        const res = await fetch(assetUrl);
+        if (!res.ok) return '';
+        content = await res.text();
+      } else {
+        // Final fallback: attempt fetching a normalized public path
+        const pub = toPublicPath(docUrl);
+        if (pub) {
+          const res = await fetch(pub);
+          if (!res.ok) return '';
+          content = await res.text();
+        }
+      }
     }
+    
+    // Convert to HTML based on file type
+    if (isAdoc || fileExtension === 'adoc' || fileExtension === 'asciidoc') {
+      return convertAsciiDocToHtml(content);
+    }
+    
+    // For markdown, return as-is (will be processed by react-markdown)
+    return content;
 
-    const assetUrl = getMarkdownAssetUrl(markdownUrl);
-    if (assetUrl) {
-      const res = await fetch(assetUrl);
-      if (!res.ok) return '';
-      return await res.text();
-    }
-    // Final fallback: attempt fetching a normalized public path
-    const pub = toPublicPath(markdownUrl);
-    if (pub) {
-      const res = await fetch(pub);
-      if (!res.ok) return '';
-      return await res.text();
-    }
-
-    return '';
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('Failed to load markdown:', e);
+    console.warn('Failed to load documentation:', e);
     return '';
   }
 }
+
+// Backward compatibility: alias loadMarkdown to loadDocumentation
+export const loadMarkdown = loadDocumentation;
 
 export default loadMarkdown;

@@ -15,10 +15,10 @@ function buildFolderToOverrides(): Record<string, Record<string, string>> {
   const res: Record<string, Record<string, string>> = {};
   const list = (projectsData as any).projects as Array<any>;
   for (const p of list) {
-    const md: string | undefined = p.markdownUrl;
+    const docUrl: string | undefined = p.docUrl || p.markdownUrl;
     if (!md) continue;
     // markdownUrl: src/data/projects/<Folder>/README.md
-    const m = md.match(/src\/data\/projects\/([^/]+)\//i);
+    const m = docUrl.match(/src\/data\/projects\/([^/]+)\//i);
     const folder = m?.[1];
     if (!folder) continue;
     if (p['cloc-mapping-overwrite']) {
