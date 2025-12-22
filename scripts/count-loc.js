@@ -134,18 +134,9 @@ async function main() {
   const args = parseArgs();
   try {
     const extraClocArgs = [];
-    if (args.notMatchD) {
-      extraClocArgs.push(`--not-match-d=${args.notMatchD}`);
-    } else if (args.excludeDirs && args.excludeDirs.length) {
-      // backward-compatible: if excludeDirs were passed, convert to a single not-match regex that matches any of them
-      const escaped = args.excludeDirs.map((p) => {
-        // escape regex special chars except '/'
-        const esc = p.replace(/[-\\^$*+?.()|[\]{}\\\\]/g, '\\$&');
-        // convert path separators into a pattern matching both / and \\ (cross-platform)
-        return esc.replace(/\//g, '[/\\\\]');
-      });
-      const combined = `(?:${escaped.join('|')})`;
-      extraClocArgs.push(`--not-match-d=${combined}`);
+    if (args.excludeDirs && args.excludeDirs.length) {
+      // use --exclude-dir with comma-separated directory names
+      extraClocArgs.push(`--exclude-dir=${args.excludeDirs.join(',')}`);
     }
     // handle exclude extensions
     if (args.excludeExts && args.excludeExts.length) {

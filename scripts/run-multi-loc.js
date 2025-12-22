@@ -50,14 +50,8 @@ function runEntry(repoRoot, entry, globalExcludes, globalExcludeExts, dryRun) {
 
   const npmArgs = ['run', 'loc', '--', src, '--output', outPath];
       if (uniqExcludes.length) {
-        // convert exclude patterns into a single regex for --not-match-d
-        // Escape regex special chars (except /) and replace / with a pattern matching both slashes
-        const parts = uniqExcludes.map((p) => {
-          const esc = String(p).replace(/[-\\^$+?()|[\]{}\\\\]/g, '\\$&');
-          return esc.replace(/\//g, '[/\\\\]');
-        });
-        const combined = `(?:${parts.join('|')})`;
-        npmArgs.push(`--not-match-d=${combined}`);
+        // use --exclude-dir with comma-separated directory names
+        npmArgs.push(`--exclude-dir=${uniqExcludes.join(',')}`);
       }
       // handle exclude extensions (global + per-project)
       const exts = [];
