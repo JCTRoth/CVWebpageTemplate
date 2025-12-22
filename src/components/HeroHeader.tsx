@@ -55,7 +55,7 @@ function useScrollProgress(range: number) {
 const HeroHeader: React.FC<HeroHeaderProps> = ({
   shrinkRange = 320,
   minHeight = 220,
-  maxHeight = 420,
+  maxHeight = 400,
   navFadeThreshold = 0.45,
 }) => {
   const profile = (resume as any).profile as { name: string; title: string; email?: string; skills: Record<string, string[]> | string[] } | undefined;
