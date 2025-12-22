@@ -2,6 +2,7 @@ import React from 'react';
 import resolveMarkdownImage from './markdownImageResolver';
 import { SkillBadgeMarkdown } from '../components/SkillBadge';
 import { YouTubeEmbedMarkdown } from '../components/YouTubeEmbed';
+import { ZoomableImage } from '../components/ZoomableImage';
 import {
   DownloadButtonMarkdown,
   GithubButtonMarkdown,
@@ -91,7 +92,7 @@ export function createMarkdownComponents(originPath: string): MarkdownComponents
         ...(explicitHeight ? { height: explicitHeight } : {}),
       };
       const className = hasExplicitSize ? 'w-full h-auto rounded-md' : 'max-w-full h-auto rounded-md';
-      return <img src={resolved} alt={alt as string | undefined} className={className} style={style} />;
+      return <ZoomableImage src={resolved} alt={alt as string | undefined} className={className} style={style} />;
     },
   };
   return components as MarkdownComponents;

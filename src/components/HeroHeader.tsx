@@ -154,11 +154,11 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
 
       {/* Container: flex column; nav anchored to bottom via mt-auto to remain visible when hero shrinks */}
       <div className="relative max-w-6xl mx-auto h-full px-6 flex flex-col">
-        {/* Persistent theme toggle positioned in top-right within hero bounds */}
-        <div className="absolute top-4 right-4 z-20">
+        {/* Theme toggle: top-right on desktop, below content on mobile */}
+        <div className="absolute top-4 right-4 z-20 md:block hidden">
           <ThemeToggle className="theme-toggle-hero" />
         </div>
-        <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6 pt-4">
+        <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6 pt-4 pb-4 md:pb-0">
           <motion.img
             src={personal_photo}
             alt={`${profile?.name ?? 'Profile'} photo`}
@@ -198,6 +198,10 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
                     .join(' \u2022 ')}
             </motion.div>
           </div>
+        </div>
+        {/* Mobile theme toggle below content */}
+        <div className="md:hidden flex justify-center mt-4">
+          <ThemeToggle className="theme-toggle-hero" />
         </div>
       </div>
       {/* LOC flair removed */}
