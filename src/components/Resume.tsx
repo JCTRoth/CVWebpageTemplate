@@ -106,7 +106,9 @@ const Section: React.FC<{ title: string; items: ResumeJsonEntry[] }> = ({ title,
               <img
                 src={getCompanyImageUrl(it.company_image)}
                 alt={`${it.company} logo`}
-                className="w-12 h-auto object-contain flex-shrink-0"
+                className={`w-12 h-auto object-contain flex-shrink-0 ${
+                  it.company_image.toLowerCase().endsWith('.svg') ? 'bg-white p-1 rounded' : ''
+                }`}
                 loading="lazy"
               />
             ) : null}
