@@ -12,7 +12,7 @@ const App: React.FC = () => {
   return (
     // If you dont like the hashes in the addresses, you can use <BrowserRouter> instead.
     // Then make sure your server redirects all unknown routes to index.html, e.g. <address>/projects, <address>/contact, etc.
-    <HashRouter>
+    <HashRouter future={{ v7_relativeSplatPath: true }}>
       <ThemeProvider>
       <div className="min-h-screen flex flex-col app-bg md:pb-0">
         {/* Not really needed because navigation is already possible via side bar */}

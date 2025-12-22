@@ -102,3 +102,6 @@ temp/
 
 # Ensure lockfiles remain tracked
 # (do NOT ignore package-lock.json, yarn.lock, pnpm-lock.yaml)
+
+# Ignore all git projects in a specific folder
+git_projects/

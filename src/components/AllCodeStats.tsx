@@ -16,7 +16,7 @@ function buildFolderToOverrides(): Record<string, Record<string, string>> {
   const list = (projectsData as any).projects as Array<any>;
   for (const p of list) {
     const docUrl: string | undefined = p.docUrl || p.markdownUrl;
-    if (!md) continue;
+    if (!docUrl) continue;
     // markdownUrl: src/data/projects/<Folder>/README.md
     const m = docUrl.match(/src\/data\/projects\/([^/]+)\//i);
     const folder = m?.[1];
