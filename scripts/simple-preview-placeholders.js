@@ -43,7 +43,7 @@ function copyPreviewIfAvailable(projectName) {
   if (imagePath) {
     const previewPath = path.join(targetDir, 'preview' + path.extname(imagePath));
     fs.copyFileSync(imagePath, previewPath);
-    console.log(`✅ Copied preview image for ${projectName}`);
+    console.log(`Copied preview image for ${projectName}`);
     return true;
   }
   
@@ -71,12 +71,12 @@ File should be named: preview.jpg or preview.png
 Recommended size: 800x450 pixels`;
   
   fs.writeFileSync(previewPath, placeholderContent);
-  console.log(`ℹ️  Created placeholder file for ${projectName}`);
+  console.log(`Created placeholder file for ${projectName}`);
 }
 
 async function main() {
   try {
-    console.log('🖼️  Creating preview images for projects...\n');
+    console.log('Creating preview images for projects...\n');
     
     // List of projects that might need previews
     const projects = [
@@ -100,7 +100,7 @@ async function main() {
       const previewJpgPath = path.join(PROJECTS_DIR, projectName, 'preview.jpg');
       
       if (fs.existsSync(previewPath) || fs.existsSync(previewJpgPath)) {
-        console.log(`✅ Preview already exists for ${projectName}`);
+      console.log(`Preview already exists for ${projectName}`);
       } else {
         const copied = copyPreviewIfAvailable(projectName);
         if (!copied) {
@@ -110,14 +110,14 @@ async function main() {
       }
     }
     
-    console.log(`\n🎉 Preview creation complete! ${createdCount} projects processed.`);
-    console.log('\n📝 Next steps:');
+    console.log(`\nPreview creation complete! ${createdCount} projects processed.`);
+    console.log('\nNext steps:');
     console.log('- Replace preview.txt files with actual images (preview.jpg/png)');
     console.log('- Use screenshots, diagrams, or other relevant visuals');
     console.log('- Recommended size: 800x450 pixels');
     
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }

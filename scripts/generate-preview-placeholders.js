@@ -69,12 +69,12 @@ async function generatePlaceholder(projectName, width = 800, height = 450) {
   
   await new Promise((resolve) => out.on('finish', resolve));
   
-  console.log(`✅ Created placeholder preview for ${projectName}`);
+  console.log(`Created placeholder preview for ${projectName}`);
 }
 
 async function main() {
   try {
-    console.log('🎨 Generating preview placeholders...\n');
+    console.log('Generating preview placeholders...\n');
     
     // Projects that need placeholders
     const projectsWithoutPreviews = [
@@ -89,14 +89,14 @@ async function main() {
       if (!fs.existsSync(previewPath)) {
         await generatePlaceholder(projectName);
       } else {
-        console.log(`ℹ️  Preview already exists for ${projectName}`);
+      console.log(`Preview already exists for ${projectName}`);
       }
     }
     
-    console.log('\n🎉 Preview placeholder generation complete!');
+    console.log('\nPreview placeholder generation complete!');
     
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }
