@@ -22,7 +22,7 @@ export function convertAsciiDocToHtml(adocContent: string): string {
         'showtitle': false,  // Don't show document title as it's already shown in the page header
         'toc': false,       // TOC is handled by the page layout
         'sectanchors': false,
-        'sectlinks': true,
+        'sectlinks': false,
         'hardbreaks': false,
       },
       // Safe mode for client-side conversion
