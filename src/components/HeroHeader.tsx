@@ -61,6 +61,8 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
   const profile = (resume as any).profile as { name: string; title: string; email?: string; skills: Record<string, string[]> | string[] } | undefined;
   const progress = useScrollProgress(shrinkRange);
 
+  const noiseSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="200" height="200" filter="url(#noise)" opacity="0.4"/></svg>`;
+
   // Measure the actual content height so we can ensure the hero never
   // collapses smaller than the content. We add a small offset for breathing room.
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -170,7 +172,7 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"200\" fill=\"none\"><filter id=\"noise\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"4\" stitchTiles=\"stitch\"/></filter><rect width=\"200\" height=\"200\" filter=\"url(#noise)\" opacity=\"0.4\"/></svg>")',
+            backgroundImage: `url("${noiseSvg}")`,
             backgroundSize: '200px 200px',
             backgroundRepeat: 'repeat',
             pointerEvents: 'none',
