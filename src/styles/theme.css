@@ -1,18 +1,18 @@
 :root {
   /* Base light theme tokens */
   --color-bg: #f7f9fc;
-  --color-bg-alt: #ffffff;
-  --color-surface: #ffffffcc; /* translucent */
-  --color-surface-solid: #ffffff;
+  --color-bg-alt: #fefafe;
+  --color-surface: #fefefecc; /* translucent */
+  --color-surface-solid: #fefafe;
   --color-border: #d9dde4;
   --color-border-strong: #b9c2d0;
   --color-text: #1e293b; /* slate-800 */
   --color-text-muted: #475569; /* slate-600 */
-  --color-text-inverse: #ffffff;
+  --color-text-inverse: #fefafe;
   --color-primary: #1d8fff;
   --color-primary-accent: #4ba9ff;
   --color-accent: #ff951d;
-  --gradient-bg: radial-gradient(circle at 30% 30%, #ffffff, #e3edf7 70%);
+  --gradient-bg: radial-gradient(circle at 30% 30%, #fefefe, #e3edf7 70%);
   --shadow-elevate-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
   --shadow-elevate-md: 0 4px 12px -2px rgba(0,0,0,0.15),0 2px 4px -1px rgba(0,0,0,0.1);
 }

@@ -1,7 +1,7 @@
-
 # your stuff is in here
 /public/data/
 /src/data/
+public/favicon.png
 
 # Node modules
 node_modules/
@@ -105,5 +105,12 @@ temp/
 
 # Ignore all git projects in a specific folder
 git_projects/
+
 # Resume is after npm run dist there
 data/
+
+# Archives
+*.zip
+*.tar
+*.tar.7z
+*.tar.gz

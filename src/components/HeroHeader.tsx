@@ -103,23 +103,50 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
   const yParallaxBg = useTransform(heightMV, [effectiveMin, maxHeight], [0, -40]); // subtle upward
 
   // We'll also drive gradient color shift via progress
+  // Detect theme (client-side) and choose gradient endpoints accordingly.
+  // Make theme detection reactive so toggling theme after mount updates the hero.
+  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+  );
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const el = document.documentElement;
+    const obs = new MutationObserver(() => {
+      setIsDarkMode(el.classList.contains('dark'));
+    });
+    obs.observe(el, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
+  }, []);
   const gradient = useTransform(heightMV, (h: number) => {
     const t = 1 - (h - minHeight) / (maxHeight - minHeight); // 0 at top -> 1 shrunk
-    // Interpolate colors
-    const startColor = { r: 5, g: 20, b: 60 };
-    const endColor = { r: 10, g: 120, b: 255 };
     const mix = (a: number, b: number) => Math.round(a + (b - a) * t);
-    const c1 = `rgb(${mix(startColor.r, endColor.r)}, ${mix(startColor.g, endColor.g)}, ${mix(startColor.b, endColor.b)})`;
-    const c2 = `rgb(${mix(startColor.r * 0.5, endColor.r * 0.8)}, ${mix(startColor.g * 0.5, endColor.g * 0.8)}, ${mix(startColor.b * 0.5, endColor.b * 0.8)})`;
-    return `linear-gradient(135deg, ${c1}, ${c2})`;
+
+    if (isDarkMode) {
+      // Interpolate dark -> bright azure (existing behavior)
+      const startColor = { r: 5, g: 20, b: 60 };
+      const endColor = { r: 10, g: 120, b: 255 };
+      const c1 = `rgb(${mix(startColor.r, endColor.r)}, ${mix(startColor.g, endColor.g)}, ${mix(startColor.b, endColor.b)})`;
+      const c2 = `rgb(${mix(startColor.r * 0.5, endColor.r * 0.8)}, ${mix(startColor.g * 0.5, endColor.g * 0.8)}, ${mix(startColor.b * 0.5, endColor.b * 0.8)})`;
+      return `linear-gradient(135deg, ${c1}, ${c2})`;
+    }
+
+    // Light mode: use white -> pale blue that fits theme tokens
+    const lightStart = { r: 255, g: 255, b: 255 };
+    const lightEnd = { r: 233, g: 244, b: 255 }; // #e9f4ff (matches theme)
+    const l1 = `rgb(${mix(lightStart.r, lightEnd.r)}, ${mix(lightStart.g, lightEnd.g)}, ${mix(lightStart.b, lightEnd.b)})`;
+    const l2 = `rgb(${mix(Math.round(lightStart.r * 0.9), Math.round(lightEnd.r * 0.9))}, ${mix(Math.round(lightStart.g * 0.9), Math.round(lightEnd.g * 0.9))}, ${mix(Math.round(lightStart.b * 0.9), Math.round(lightEnd.b * 0.9))})`;
+    return `linear-gradient(135deg, ${l1}, ${l2})`;
   });
 
   // nav opacity and translate based on progress
   const navOpacity = useTransform(progress, [navFadeThreshold, 1], [0, 1]);
   const navY = useTransform(progress, [navFadeThreshold, 1], [20, 0]);
 
-  const containerStyle = { height: heightMV, backgroundImage: gradient };
+  const containerStyle = isDarkMode
+    ? { height: heightMV, backgroundImage: gradient }
+    : { height: heightMV, backgroundColor: '#445b90', backgroundImage: 'none' };
   // Remove overflow-hidden so content (nav) isn't clipped as height shrinks
+  // Use white text on both modes for adequate contrast over darker backgrounds
   const baseClass = 'relative w-full text-white';
   return (
     <motion.div
@@ -162,7 +189,7 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({
           <motion.img
             src={personal_photo}
             alt={`${profile?.name ?? 'Profile'} photo`}
-            style={{ scale: scaleImg }}
+            style={{ scale: scaleImg, backgroundColor: isDarkMode ? 'transparent' : 'var(--color-bg-alt)', padding: isDarkMode ? 0 : 4 }}
             className="rounded-full object-cover shadow-xl w-28 h-28 sm:w-32 sm:h-32 md:w-48 md:h-48"
           />
           <div className="flex-1 mt-3 md:mt-0 w-full md:w-auto">
