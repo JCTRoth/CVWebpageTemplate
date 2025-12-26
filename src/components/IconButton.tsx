@@ -27,19 +27,11 @@ const baseClasses =
 
 function colorClasses(kind?: Kind, platform?: Platform, browser?: Browser): string {
   // Use brand accent ring with subtle background tint; dark mode handled by CSS variables
-  if (kind === 'github') return 'app-border bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-solid)]';
-  if (kind === 'linkedin') return 'app-border bg-[var(--color-surface)] text-[var(--color-primary)] hover:bg-[var(--color-surface-solid)]';
-  if (kind === 'website') return 'app-border bg-[var(--color-surface)] text-sky-600 dark:text-sky-300 hover:bg-[var(--color-surface-solid)]';
-  if (kind === 'browser') {
-    switch (browser) {
-      case 'firefox':
-        return 'app-border bg-[var(--color-surface)] text-orange-600 dark:text-orange-400 hover:bg-[var(--color-surface-solid)]';
-      case 'chrome':
-        return 'app-border bg-[var(--color-surface)] text-blue-600 dark:text-blue-400 hover:bg-[var(--color-surface-solid)]';
-      default:
-        return 'app-border bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 hover:bg-[var(--color-surface-solid)]';
-    }
-  }
+  const brandClasses = 'app-border bg-[var(--color-surface)] text-[var(--color-primary)] hover:bg-[var(--color-surface-solid)]';
+  if (kind === 'github') return brandClasses;
+  if (kind === 'linkedin') return brandClasses;
+  if (kind === 'website') return brandClasses;
+  if (kind === 'browser') return brandClasses;
   if (kind === 'download') {
     switch (platform) {
       case 'windows':
@@ -52,7 +44,7 @@ function colorClasses(kind?: Kind, platform?: Platform, browser?: Browser): stri
         return 'app-border bg-[var(--color-surface)] text-emerald-600 dark:text-emerald-400 hover:bg-[var(--color-surface-solid)]';
     }
   }
-  return 'app-border bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-solid)]';
+  return brandClasses;
 }
 
 function pickIcon(kind?: Kind, platform?: Platform, browser?: Browser): React.ReactNode {

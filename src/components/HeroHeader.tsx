@@ -53,7 +53,7 @@ function useScrollProgress(range: number) {
 }
 
 const HeroHeader: React.FC<HeroHeaderProps> = ({
-  shrinkRange = 320,
+  shrinkRange = 800,
   minHeight = 220,
   maxHeight = 400,
   navFadeThreshold = 0.45,

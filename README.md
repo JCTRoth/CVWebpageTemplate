@@ -1,7 +1,7 @@
 # Personal CV Web Page
 
 This project is a personal CV web page built with React and TypeScript. It showcases various projects, provides detailed project pages, and includes a responsive design for mobile compatibility.
-See [here](http://daniel.mailbase.info) for an example where this template is used.
+See [here](http://jonas.mailbase.info) for an example where this template is used or [here](http://danielroth1.github.io/CVWebpageTemplate/) for the original author's demo page.
 
 ## Features
 - modern design
@@ -179,3 +179,31 @@ npm run compress-videos
 ```
 
 This creates `[name].min.webm` (VP9) and `[name].min.mp4` (H.264) beside each `*.webm` under `src/data/**`. The renderer will automatically use these smaller variants when available. Requires `ffmpeg` (macOS: `brew install ffmpeg`).
+
+## Automated skill groups
+
+- Run `npm run build-skills` (or rely on the automatic call that runs before `npm run dev` and `npm run build`) to regenerate `src/data/skills.json` from `src/data/resume.json` and `src/data/projects.json`.
+- The generator is implemented in `scripts/build-skills.js` and:
+   - preserves resume categories as ordered groups,
+   - deduplicates skills across sources,
+   - collects project-only skills into a `Project Skills` group,
+   - exposes `metadata.singleUseSkills` for skills that appear in exactly one project.
+- Run the generator manually to inspect results or integrate it in CI before publishing.
+
+## Custom markdown tags
+
+| Tag | Purpose | Example usage |
+| --- | --- | --- |
+| ``<webm>`` | Responsive video embed with automatic MP4/WebM fallbacks. | ``<webm src="./preview.webm" max-width="640" autoplay />`` |
+| ``<youtube>`` | Lightweight YouTube iframe wrapper. | ``<youtube id="dQw4w9WgXcQ" />`` |
+| ``<skill>`` | Renders a colored skill badge inline with text. | ``Mastered <skill>React</skill> for the UI.`` |
+| ``<btn>`` | Generic icon button; set `kind="browser"`, `kind="download"`, etc. | ``<btn kind="browser" browser="firefox" href="https://mozilla.org">Open in Firefox</btn>`` |
+| ``<github>`` | GitHub button matching the component styling. | ``<github href="https://github.com/you/repo">View on GitHub</github>`` |
+| ``<linkedin>`` | LinkedIn call-to-action button. | ``<linkedin href="https://linkedin.com/in/you">Connect on LinkedIn</linkedin>`` |
+| ``<website>`` | Neutral website button (covers the requested `<webside>` tag). | ``<website href="https://mailbase.info">Portfolio</website>`` |
+| ``<download>`` / ``<windows>`` / ``<macos>`` / ``<linux>`` | Download buttons with platform icons; `<download>` accepts `os="windows"`. | ``<windows href="./app.exe">Download for Windows</windows>`` |
+| ``<firefox>`` / ``<chrome>`` | Browser-specific buttons that link to hosted demos. | ``<chrome href="https://demo.com">Try in Chrome</chrome>`` |
+| ``<highlight>`` | Emphasized content block with optional `title` and `shadow`. | ``<highlight title="Key Takeaway">Ship early and iterate.</highlight>`` |
+| ``<email>`` | Mailto button that defaults to the resume email when `href` is omitted. | ``<email>Get in touch</email>`` |
+
+All of these tags are wired up inside [src/utils/markdownComponents.ts](src/utils/markdownComponents.ts), so you can review or extend them as needed.
