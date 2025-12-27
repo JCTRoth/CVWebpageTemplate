@@ -7,7 +7,7 @@
     "extract-data-example": "node scripts/extract-data-example.js",
     "build-skills": "node scripts/build-skills.js",
     "dev": "npm run extract-data-example --silent || true; npm run build-skills --silent || true; vite",
-    "build": "npm run extract-data-example --silent || true; npm run build-skills --silent || true; vite build",
+    "build": "npm run extract-data-example --silent || true; npm run build-skills --silent || true; npm run multi-loc --silent || true; vite build",
     "preview": "vite preview --port 3001",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -16,7 +16,8 @@
     "loc": "node scripts/count-loc.js",
     "multi-loc": "node scripts/run-multi-loc.js",
     "compress-videos": "node scripts/compress-videos.js",
-    "make-favicon": "node scripts/make-favicon.js"
+    "make-favicon": "node scripts/make-favicon.js",
+    "update-git-projects": "bash scripts/update-git-projects.sh"
   },
   "dependencies": {
     "@react-spring/web": "^10.0.3",

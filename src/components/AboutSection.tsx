@@ -6,6 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import loadMarkdown from '../utils/markdownLoader';
 import { SkillBadgeMarkdown } from './SkillBadge';
 import { useMarkdownComponents } from '../utils/markdownComponents';
+import resumeData from '../data/resume.json';
 
 const ABOUT_PATH = 'data/ABOUT_ME.md';
 
@@ -14,8 +15,42 @@ export type AboutSectionProps = {
   className?: string;
 };
 
+// Calculate years of experience from resume.json startYears
+function getYearsOfExperience(): number {
+  const allItems = [...resumeData.work, ...resumeData.education];
+  let minDate = new Date();
+
+  allItems.forEach((item: any) => {
+    if (item.startYear) {
+      // Handle "MM.YYYY" or "YYYY"
+      const parts = item.startYear.split('.');
+      let year = 0;
+      let month = 0; // 0-indexed
+      if (parts.length === 2) {
+        month = parseInt(parts[0], 10) - 1;
+        year = parseInt(parts[1], 10);
+      } else if (parts.length === 1) {
+        year = parseInt(parts[0], 10);
+      }
+      
+      if (year > 0) {
+        const date = new Date(year, month, 1);
+        if (date < minDate) {
+          minDate = date;
+        }
+      }
+    }
+  });
+
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - minDate.getTime());
+  const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25); 
+  return Math.floor(diffYears);
+}
+
 // markdownComponents must be created within a React component (not at module top level)
 
+// Extract highlights from markdown text
 function extractHighlights(markdown: string, max = 3): string[] {
   // naive sentence split; prioritize sentences with first-person or strong verbs
   const sentences = markdown
@@ -36,6 +71,7 @@ function extractHighlights(markdown: string, max = 3): string[] {
     .map((x) => x.s);
 }
 
+// AboutSection component
 const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, className }) => {
   const [md, setMd] = React.useState<string>('');
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -43,8 +79,10 @@ const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, classNam
   React.useEffect(() => {
     let mounted = true;
     (async () => {
-      const text = await loadMarkdown(ABOUT_PATH);
+      let text = await loadMarkdown(ABOUT_PATH);
       if (mounted) {
+        const years = getYearsOfExperience();
+        text = text.replace(/#YEARS_OF_EXPERIENCE#/g, years.toString());
         setMd(text);
         setLoading(false);
       }

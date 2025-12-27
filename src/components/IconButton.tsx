@@ -117,7 +117,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   const ariaLabel = labelText || undefined;
   const content = React.Children.count(children) ? children : labelText;
 
-  const finalRel = rel || (target === '_blank' ? 'noreferrer noopener' : undefined);
+  const finalRel = rel || (target === '_blank' ? 'noopener noreferrer' : undefined);
 
   return (
     <a

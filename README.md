@@ -20,6 +20,7 @@ You only have add the content via files in the `/src/data` folder.
 After you have done the following customizations:
 - Add your resume information like name, title, e-mail, skills to `resume.json`
 - Add your "about me" section (ABOUT_ME.md)
+  - You can use the placeholder `#YEARS_OF_EXPERIENCE#` to automatically calculate and display your years of experience based on the earliest start date in `resume.json`.
 - Add your "contact" page (CONTACT.md)
 - Add a personal picture or use a placeholder if you are not comfortable with it (peronal_photo.jpg)
 - Add your own projects as a display of your achievements
@@ -27,6 +28,9 @@ After you have done the following customizations:
   - Add a preview image for each project `/projects/<project-name>/preview.<video-extension>`
   - After adding new videos, run `npm run compress-videos`
   - Automatically count all lines of code: Specify the projects source location in `/multi-loc-config.json` and run `npm run multi-loc`. Alternatively, manually change the count in `/projects/<project-name>/cloc.json`
+- Clone your project repositories into `git_projects/` folder to include them in automated code statistics
+  - Run `npm run update-git-projects` to update all repositories in the `git_projects/` folder
+  - The `npm run build` command automatically runs code statistics on all repositories in `git_projects/`
 
 optional:
 - Add your resume as pdf for download (resume.pdf)
@@ -63,6 +67,11 @@ npm run make-favicon
 Create code statistics
 ```
 npm run multi-loc
+```
+
+Update all git repositories in git_projects/
+```
+npm run update-git-projects
 ```
 
 Compress your videos (recommended)

@@ -22,6 +22,8 @@ const Footer: React.FC = () => {
                         <span key={link.label}>
                             <a
                                 href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-gray-400 hover:text-gray-200 underline underline-offset-2"
                             >
                                 {link.label}
