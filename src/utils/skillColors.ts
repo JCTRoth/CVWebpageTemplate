@@ -136,18 +136,56 @@ const palette = [
     chipBorder: 'border-indigo-400/40',
     chipHoverBg: 'hover:bg-indigo-600/20 dark:hover:bg-indigo-400/30',
   },
+  {
+    name: 'white',
+    dot: 'bg-white dark:bg-gray-100',
+    ring: 'focus-visible:ring-gray-500',
+    selectedRing: 'ring-4 ring-gray-400/30',
+    borderStrong: '!border-gray-600 dark:!border-gray-500',
+    borderHover: 'hover:border-gray-500 dark:hover:border-gray-300',
+    badgeHoverBg: 'hover:bg-gray-50/60 dark:hover:bg-slate-700',
+    chipBg: 'bg-gray-600/10 dark:bg-gray-400/20',
+    chipText: 'text-gray-700 dark:text-gray-200',
+    chipBorder: 'border-gray-400/40',
+    chipHoverBg: 'hover:bg-gray-600/20 dark:hover:bg-gray-400/30',
+  },
 ] as const;
 
 export type PaletteEntry = typeof palette[number];
 
-// Map skills to palette entry based on ordered groups from JSON
+// Map skills to palette entry - assign unique colors to each skill
 const skillToPalette = new Map<string, PaletteEntry>();
 
-(skillsData.groups || []).forEach((group: string[], idx: number) => {
-  const color = palette[idx % palette.length];
-  group.forEach((s) => {
-    skillToPalette.set(s, color);
-  });
+// Manual color overrides for specific skills
+const manualOverrides: Record<string, string> = {
+  'Java': 'rose',      // red
+  'Maven': 'amber',    // yellow
+  'C#': 'orange',      // orange
+  'csharp': 'orange',  // also handle lowercase
+  'CSS': 'white',      // white
+  'css': 'white',      // also handle lowercase
+};
+
+// Collect all unique skills
+const allSkills = new Set<string>();
+(skillsData.groups || []).forEach((group: string[]) => {
+  group.forEach((s) => allSkills.add(s));
+});
+
+// First, assign manual overrides
+Object.entries(manualOverrides).forEach(([skill, colorName]) => {
+  const color = palette.find(p => p.name === colorName);
+  if (color) {
+    skillToPalette.set(skill, color);
+    allSkills.delete(skill); // Remove from round-robin assignment
+  }
+});
+
+// Then assign colors in round-robin fashion to remaining skills
+let colorIndex = 0;
+allSkills.forEach((skill) => {
+  skillToPalette.set(skill, palette[colorIndex % palette.length]);
+  colorIndex++;
 });
 
 const DEFAULT_DOT = 'bg-primary-500 dark:bg-primary-400';

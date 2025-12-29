@@ -254,42 +254,39 @@ const Resume: React.FC<ResumeProps> = ({ showTitle = false, showPdfPreview = fal
       {/* JSON mode */}
       {!loading && !md && json && (
         <div>
-          {/* Profile summary / skills */}
+          {json.work?.length ? <Section title="Work" items={json.work} /> : null}
+          {json.education?.length ? <Section title="Education" items={json.education} /> : null}
+          
+          {/* Skills section */}
           {json.profile?.skills && (
-            <section className="mt-2 mb-6">
+            <section className="mt-6">
               <h2 className="text-xl font-semibold mb-3">Tech Stack</h2>
-              {Array.isArray(json.profile.skills) ? (
-                <div className="flex flex-wrap gap-2">
-                  {json.profile.skills.map((s) => (
-                    <span
-                      key={s}
-                      className="px-2 py-1 rounded bg-blue-600/10 text-blue-900 dark:text-blue-200 text-xs border border-blue-600/30"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {Object.entries(json.profile.skills).map(([category, items]) => (
-                    <div key={category}>
-                      <h3 className="font-medium text-sm mb-1 text-blue-700 dark:text-blue-300">
-                        {category}
-                      </h3>
+              <div className="flex flex-wrap gap-2">
+                {Array.isArray(json.profile.skills) ? (
+                  json.profile.skills.map((skill, idx) => (
+                    <SkillBadge key={`skill-${idx}`} skill={skill}>
+                      {skill}
+                    </SkillBadge>
+                  ))
+                ) : (
+                  Object.entries(json.profile.skills).map(([category, skills]) => (
+                    <div key={category} className="w-full mb-4">
+                      <h3 className="text-lg font-medium mb-2 text-gray-700 dark:text-gray-300">{category}</h3>
                       <div className="flex flex-wrap gap-2">
-                        {items.map((s) => (
-                          <SkillBadge key={s}>{s}</SkillBadge>
+                        {skills.map((skill, idx) => (
+                          <SkillBadge key={`${category}-${idx}`} skill={skill}>
+                            {skill}
+                          </SkillBadge>
                         ))}
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
+                  ))
+                )}
+              </div>
             </section>
           )}
-          {json.work?.length ? <Section title="Work" items={json.work} /> : null}
-          {json.education?.length ? <Section title="Education" items={json.education} /> : null}
-          {!json.work?.length && !json.education?.length && (
+          
+          {!json.work?.length && !json.education?.length && !json.profile?.skills && (
             <p className="text-gray-700">
               Your <code>src/{RESUME_JSON_PATH}</code> is empty.
             </p>
