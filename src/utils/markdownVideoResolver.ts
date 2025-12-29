@@ -7,8 +7,8 @@
 // Create a mapping of all .webm/.mp4 assets under src/data to their final URLs.
 const videoModules: Record<string, string> = (() => {
   try {
-    // Eagerly load URLs for *minified* video assets under data/**
-    // We only import `.min.webm` and `.min.mp4` so Vite only bundles the small versions
+    // Eagerly load URLs for video assets under data/**
+    // Include both minified and hashed versions
     // @ts-ignore - import.meta.glob is supported by Vite and typed as any here
     const mods = import.meta.glob('../data/**/*.min.{webm,mp4}', { query: '?url', import: 'default', eager: true });
     return mods as Record<string, string>;

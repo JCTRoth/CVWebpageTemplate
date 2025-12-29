@@ -155,7 +155,7 @@ const ProjectDetail: React.FC = () => {
                                     />
                                 </aside>
 
-                                <div className="order-2 lg:order-1 prose prose-sm sm:prose lg:prose-lg flex-1 dark:prose-invert markdown-wide">
+                                <div className="order-2 lg:order-1 prose prose-sm sm:prose lg:prose-lg flex-1 dark:prose-invert markdown-wide max-w-full overflow-hidden">
                                     {loading && <p className="text-[var(--color-text-muted)]">Loading details…</p>}
                                     {!loading && md && (
                                         <ReactMarkdown

@@ -208,7 +208,7 @@ export function createMarkdownComponents(originPath: string): MarkdownComponents
 				...(explicitWidth ? { maxWidth: explicitWidth } : {}),
 				...(explicitHeight ? { maxHeight: explicitHeight } : {}),
 			};
-			const className = hasExplicitSize ? 'w-full h-auto rounded-md' : 'max-w-full h-auto rounded-md';
+			const className = hasExplicitSize ? 'w-full h-auto rounded-md max-w-full' : 'max-w-full h-auto rounded-md';
 			return React.createElement('img', { src: resolved, alt: alt as string | undefined, className, style });
 		},
 	};
