@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin, FaWindows, FaApple, FaLinux, FaDownload, FaGlobe,
 type Platform = 'windows' | 'macos' | 'linux';
 type Browser = 'firefox' | 'chrome';
 type Kind = 'github' | 'linkedin' | 'download' | 'website' | 'browser';
+type Size = 'sm' | 'md' | 'lg';
 
 export type IconButtonProps = {
   href?: string;
@@ -16,6 +17,7 @@ export type IconButtonProps = {
   title?: string;
   target?: string;
   rel?: string;
+  size?: Size;
 };
 
 function clsx(...parts: Array<string | undefined | false>) {
@@ -23,7 +25,19 @@ function clsx(...parts: Array<string | undefined | false>) {
 }
 
 const baseClasses =
-  'inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-semibold shadow-sm no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1';
+  'inline-flex items-center gap-2 rounded-md border font-semibold shadow-sm no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1';
+
+function sizeClasses(size: Size = 'md'): string {
+  switch (size) {
+    case 'sm':
+      return 'px-2.5 py-1 text-xs';
+    case 'lg':
+      return 'px-4 py-2 text-base';
+    case 'md':
+    default:
+      return 'px-3 py-1.5 text-sm';
+  }
+}
 
 function colorClasses(kind?: Kind, platform?: Platform, browser?: Browser): string {
   // Use brand accent ring with subtle background tint; dark mode handled by CSS variables
@@ -109,6 +123,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   title,
   target,
   rel,
+  size,
 }) => {
   const labelText = React.Children.count(children)
     ? undefined
@@ -121,7 +136,7 @@ const IconButton: React.FC<IconButtonProps> = ({
 
   return (
     <a
-      className={clsx('not-prose', baseClasses, colorClasses(kind, platform, browser), className)}
+      className={clsx('not-prose', baseClasses, sizeClasses(size), colorClasses(kind, platform, browser), className)}
       href={href}
       download={download}
       aria-label={ariaLabel}
@@ -151,6 +166,7 @@ type MarkdownAnyProps = {
   browser?: Browser; // for <btn kind="browser" browser="firefox" href="..."/>
   kind?: Kind;
   children?: React.ReactNode;
+  size?: Size;
 };
 
 function toBool(v: string | boolean | undefined): boolean | undefined {
@@ -170,6 +186,7 @@ export const IconButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     platform={props.platform || props.os}
     browser={props.browser}
     download={toBool(props.download)}
+    size={props.size}
     className={props.className}
     title={props.title}
     target={props.target}
@@ -183,6 +200,7 @@ export const GithubButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
   <IconButton
     href={props.href}
     kind="github"
+    size={props.size}
     className={props.className}
     title={props.title}
     target={props.target || '_blank'}
@@ -196,6 +214,7 @@ export const WebsiteButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
   <IconButton
     href={props.href}
     kind="website"
+    size={props.size}
     className={props.className}
     title={props.title}
     target={props.target || '_blank'}
@@ -209,6 +228,7 @@ export const LinkedInButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
   <IconButton
     href={props.href}
     kind="linkedin"
+    size={props.size}
     className={props.className}
     title={props.title}
     target={props.target || '_blank'}
@@ -228,6 +248,7 @@ export const DownloadButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>
@@ -244,6 +265,7 @@ export const WindowsButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>
@@ -259,6 +281,7 @@ export const MacosButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>
@@ -274,6 +297,7 @@ export const LinuxButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>
@@ -289,6 +313,7 @@ export const FirefoxButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target || '_blank'}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>
@@ -303,6 +328,7 @@ export const ChromeButtonMarkdown: React.FC<MarkdownAnyProps> = (props) => (
     title={props.title}
     target={props.target || '_blank'}
     rel={props.rel}
+    size={props.size}
   >
     {props.children}
   </IconButton>

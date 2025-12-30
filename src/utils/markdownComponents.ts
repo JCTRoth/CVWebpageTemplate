@@ -144,7 +144,9 @@ export function createMarkdownComponents(originPath: string): MarkdownComponents
 		youtube: YouTubeEmbedMarkdown,
 		btn: IconButtonMarkdown,
 		github: GithubButtonMarkdown,
-		website: WebsiteButtonMarkdown,
+			website: WebsiteButtonMarkdown,
+			// Alias for "weblink" as requested; behaves like <website>
+			weblink: WebsiteButtonMarkdown,
 		linkedin: LinkedInButtonMarkdown,
 		download: DownloadButtonMarkdown,
 		windows: WindowsButtonMarkdown,
