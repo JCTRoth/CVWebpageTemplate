@@ -6,6 +6,7 @@ import resume from '../data/resume.json';
 import personal_photo from '../data/personal_photo.jpg';
 import Resume from '../components/Resume';
 import AboutSection from '../components/AboutSection';
+import SkillBadge from '../components/SkillBadge';
 
 const Home: React.FC = () => {
     // Profile information now lives in resume.json
@@ -22,6 +23,7 @@ const Home: React.FC = () => {
             <section className="px-4 lg:px-8 pb-2 mt-6 max-w-6xl content-center mx-auto">
                 <AboutSection showTitle={false} />
             </section>
+
             {showFullResume && (
                 <section className="px-4 lg:px-8 pb-2 mt-6 max-w-6xl content-center mx-auto">
                     {/* Render full Resume without title and without PDF preview on Home */}
@@ -59,10 +61,6 @@ const Home: React.FC = () => {
                                     <li className="text-gray-500">Add your work history in src/data/resume.json</li>
                                 )}
                             </ul>
-                        </div>
-                        <div>
-                            <h3 className="font-medium">Tech Stack</h3>
-                            <p className="text-gray-700">{profile?.skills?.join(', ')}</p>
                         </div>
                     </div>
                 </section>

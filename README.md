@@ -16,21 +16,21 @@ Fork (if you want) or clone the repository directly:
 git clone git@github.com:danielroth1/CVWebpageTemplate.git
 ```
 
-You only have add the content via files in the `/src/data` folder. 
+You only have to add content via files in the `src/data` folder.
 After you have done the following customizations:
-- Add your resume information like name, title, e-mail, skills to `resume.json`
-- Add your "about me" section (ABOUT_ME.md)
-  - You can use the placeholder `#YEARS_OF_EXPERIENCE#` to automatically calculate and display your years of experience based on the earliest start date in `resume.json`.
-- Add your "contact" page (CONTACT.md)
-- Add a personal picture or use a placeholder if you are not comfortable with it (peronal_photo.jpg)
-- Add your own projects as a display of your achievements
-  - Add a project description (projects.json + `README.md` inside `projects/<project-name>/`)
-  - Add a preview image for each project `/projects/<project-name>/preview.<video-extension>`
-  - After adding new videos, run `npm run compress-videos`
-  - Automatically count all lines of code: Specify the projects source location in `/multi-loc-config.json` and run `npm run multi-loc`. Alternatively, manually change the count in `/projects/<project-name>/cloc.json`
-- Clone your project repositories into `git_projects/` folder to include them in automated code statistics
-  - Run `npm run update-git-projects` to update all repositories in the `git_projects/` folder
-  - The `npm run build` command automatically runs code statistics on all repositories in `git_projects/`
+- Add your resume information (name, title, e-mail, skills) to `src/data/resume.json`
+- Add your "about me" section in `src/data/ABOUT_ME.md`
+   - You can use the dynamic placeholder `<YEARS_OF_EXPERIENCE />` in Markdown or AsciiDoc to automatically calculate and display your years of experience based on the earliest start date in `src/data/resume.json`.
+- Add your contact page in `src/data/CONTACT.md`
+- Add a personal picture (or placeholder) at `src/data/personal_photo.jpg`
+- Add projects to showcase your work:
+   - Add a project description (`projects.json` + `README.md` inside `src/data/projects/<project-name>/`)
+   - Add preview media for each project under `src/data/projects/<project-name>/preview.*`
+   - After adding videos run `npm run compress-videos`
+   - Count lines of code by configuring `multi-loc-config.json` and running `npm run multi-loc`, or provide a manual `cloc.json` for each project.
+- Clone project repositories into the `git_projects/` folder to include them in automated code statistics
+   - Update those repositories with `npm run update-git-projects`
+   - The build process runs code statistics for repositories in `git_projects/` by default
 
 optional:
 - Add your resume as pdf for download (resume.pdf)
@@ -38,22 +38,22 @@ optional:
 - Color match your skills by grouping them in `skills.json`
 - Change the Skill colors in `/src/utils/SkillColors.ts`
 
-Set it up
+Setup
 ```
-npm run install
+npm install
 ```
 
-Try it out
+Run in development mode
 ```
 npm run dev
 ```
 
-Create distributable
+Build for production
 ```
 npm run build
 ```
 
-and deploy it. I have provided a script for deployment on a ftp file server, see scripts/deploy.sh
+Deploy
 ```
 ./scripts/deploy.sh
 ```

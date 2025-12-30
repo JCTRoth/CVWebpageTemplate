@@ -256,37 +256,8 @@ const Resume: React.FC<ResumeProps> = ({ showTitle = false, showPdfPreview = fal
         <div>
           {json.work?.length ? <Section title="Work" items={json.work} /> : null}
           {json.education?.length ? <Section title="Education" items={json.education} /> : null}
-          
-          {/* Skills section */}
-          {json.profile?.skills && (
-            <section className="mt-6">
-              <h2 className="text-xl font-semibold mb-3">Tech Stack</h2>
-              <div className="flex flex-wrap gap-2">
-                {Array.isArray(json.profile.skills) ? (
-                  json.profile.skills.map((skill, idx) => (
-                    <SkillBadge key={`skill-${idx}`} skill={skill}>
-                      {skill}
-                    </SkillBadge>
-                  ))
-                ) : (
-                  Object.entries(json.profile.skills).map(([category, skills]) => (
-                    <div key={category} className="w-full mb-4">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700 dark:text-gray-300">{category}</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {skills.map((skill, idx) => (
-                          <SkillBadge key={`${category}-${idx}`} skill={skill}>
-                            {skill}
-                          </SkillBadge>
-                        ))}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </section>
-          )}
-          
-          {!json.work?.length && !json.education?.length && !json.profile?.skills && (
+
+          {!json.work?.length && !json.education?.length && (
             <p className="text-gray-700">
               Your <code>src/{RESUME_JSON_PATH}</code> is empty.
             </p>

@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import loadMarkdown from '../utils/markdownLoader';
 import { SkillBadgeMarkdown } from './SkillBadge';
+import SkillBadge from './SkillBadge';
 import { useMarkdownComponents } from '../utils/markdownComponents';
 import resumeData from '../data/resume.json';
 
@@ -81,8 +82,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, classNam
     (async () => {
       let text = await loadMarkdown(ABOUT_PATH);
       if (mounted) {
-        const years = getYearsOfExperience();
-        text = text.replace(/#YEARS_OF_EXPERIENCE#/g, years.toString());
         setMd(text);
         setLoading(false);
       }
@@ -93,7 +92,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, classNam
   }, []);
 
   const markdownComponents = useMarkdownComponents(ABOUT_PATH);
-  const highlights = md ? extractHighlights(md, 3) : [];
   return (
     <div className={`relative ${className ?? ''}`}>
       {showTitle && (
@@ -101,23 +99,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, classNam
           <FaUser /> About
         </h1>
       )}
-      {/* Highlights Pillars */}
-      {/* {highlights.length > 0 && (
-        <div className="grid sm:grid-cols-3 gap-4 mb-6">
-          {highlights.map((h, i) => (
-            <div
-              key={i}
-              className="group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur px-4 py-3 shadow-elevate-sm hover:shadow-elevate-md transition focus-within:shadow-elevate-md"
-              tabIndex={0}
-            >
-              <div className="absolute inset-0 rounded-xl pointer-events-none group-hover:shadow-glow/10" />
-              <p className="text-xs font-medium text-slate-700 dark:text-slate-200 leading-snug">
-                {h}
-              </p>
-            </div>
-          ))}
-        </div>
-      )} */}
   <div>
         {loading && <p className="text-gray-500">Loading…</p>}
         {!loading && md && (
@@ -133,6 +114,50 @@ const AboutSection: React.FC<AboutSectionProps> = ({ showTitle = false, classNam
               >
                 {md}
               </ReactMarkdown>
+            </div>
+            {/* Tech Stack section */}
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold mb-3">Tech Stack</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {resumeData.profile && resumeData.profile.skills && (
+                  <>
+                    {Array.isArray(resumeData.profile.skills) && (
+                      <div className="md:col-span-2">
+                        <h3 className="font-medium text-sm mb-2">Skills</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {resumeData.profile.skills.map((s: string) => (
+                            <SkillBadge key={s} skill={s} className="cursor-default">
+                              {s}
+                            </SkillBadge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {typeof resumeData.profile.skills === 'object' &&
+                      !Array.isArray(resumeData.profile.skills) &&
+                      Object.entries(resumeData.profile.skills).map(([category, skills]) => {
+                        const list = Array.isArray(skills)
+                          ? (skills as string[])
+                          : String(skills)
+                              .split(',')
+                              .map((s) => s.trim())
+                              .filter(Boolean);
+                        return (
+                          <div key={category}>
+                            <h3 className="font-medium text-sm mb-2">{category}</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {list.map((s) => (
+                                <SkillBadge key={s} skill={s} className="cursor-default">
+                                  {s}
+                                </SkillBadge>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         )}

@@ -6,6 +6,7 @@ import { ZoomableImage } from '../components/ZoomableImage';
 import {
   DownloadButtonMarkdown,
   GithubButtonMarkdown,
+  WebsiteButtonMarkdown,
   IconButtonMarkdown,
   LinkedInButtonMarkdown,
   WindowsButtonMarkdown,
@@ -18,15 +19,25 @@ import { FaEnvelope } from 'react-icons/fa';
 import resumeData from '../data/resume.json';
 import ReactMarkdown from 'react-markdown';
 import { HighlightMarkdown } from './Highlight';
+import { calculateYearsOfExperience } from './markdownLoader';
+
+// YearsOfExperience component: renders computed years as text
+function YearsOfExperience(_: any) {
+  const yearsStr = calculateYearsOfExperience();
+  const years = parseInt(yearsStr, 10) || 0;
+  return <span>{years}</span>;
+}
 
 export type MarkdownComponents = Parameters<typeof ReactMarkdown>[0]['components'];
 
 export function createMarkdownComponents(originPath: string): MarkdownComponents {
   const components: any = {
     skill: SkillBadgeMarkdown,
+    'years-of-experience': YearsOfExperience,
     youtube: YouTubeEmbedMarkdown,
     btn: IconButtonMarkdown,
     github: GithubButtonMarkdown,
+    website: WebsiteButtonMarkdown,
     linkedin: LinkedInButtonMarkdown,
     download: DownloadButtonMarkdown,
     windows: WindowsButtonMarkdown,

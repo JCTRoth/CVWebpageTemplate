@@ -5,10 +5,26 @@ import skillsData from '../data/skills.json';
  * Each skill gets a unique strong, powerful color, with pastel variants available later.
  * We provide vibrant, bold colors for maximum visual impact and uniqueness.
  */
-const palette = [
+export interface PaletteEntry {
+  name: string;
+  icon?: string;
+  dot: string;
+  ring: string;
+  selectedRing?: string;
+  borderStrong?: string;
+  borderHover?: string;
+  badgeHoverBg?: string;
+  chipBg?: string;
+  chipText?: string;
+  chipBorder?: string;
+  chipHoverBg?: string;
+}
+
+export const palette: PaletteEntry[] = [
   // .NET Ecosystem - Electric Blue
   {
     name: 'dotnet',
+    icon: 'FaCode',
     dot: 'bg-blue-700 dark:bg-blue-600',
     ring: 'focus-visible:ring-blue-600',
     selectedRing: 'ring-4 ring-blue-500/40',
@@ -23,6 +39,7 @@ const palette = [
   // C# - Royal Blue
   {
     name: 'csharp',
+    icon: 'SiCsharp',
     dot: 'bg-blue-800 dark:bg-blue-700',
     ring: 'focus-visible:ring-blue-700',
     selectedRing: 'ring-4 ring-blue-600/40',
@@ -37,6 +54,7 @@ const palette = [
   // ASP.NET - Deep Navy
   {
     name: 'aspnet',
+    icon: 'FaServer',
     dot: 'bg-indigo-800 dark:bg-indigo-700',
     ring: 'focus-visible:ring-indigo-700',
     selectedRing: 'ring-4 ring-indigo-600/40',
@@ -51,6 +69,7 @@ const palette = [
   // Entity Framework - Steel Gray
   {
     name: 'entityframework',
+    icon: 'FaDatabase',
     dot: 'bg-slate-700 dark:bg-slate-600',
     ring: 'focus-visible:ring-slate-600',
     selectedRing: 'ring-4 ring-slate-500/40',
@@ -65,6 +84,7 @@ const palette = [
   // Java - Crimson Red
   {
     name: 'java',
+    icon: 'FaJava',
     dot: 'bg-red-700 dark:bg-red-600',
     ring: 'focus-visible:ring-red-600',
     selectedRing: 'ring-4 ring-red-500/40',
@@ -79,6 +99,7 @@ const palette = [
   // JavaFX - Scarlet
   {
     name: 'javafx',
+    icon: 'FaJava',
     dot: 'bg-red-800 dark:bg-red-700',
     ring: 'focus-visible:ring-red-700',
     selectedRing: 'ring-4 ring-red-600/40',
@@ -93,6 +114,7 @@ const palette = [
   // JavaScript - Golden Amber
   {
     name: 'javascript',
+    icon: 'SiJavascript',
     dot: 'bg-amber-600 dark:bg-amber-500',
     ring: 'focus-visible:ring-amber-500',
     selectedRing: 'ring-4 ring-amber-400/40',
@@ -107,6 +129,7 @@ const palette = [
   // TypeScript - Sapphire Blue
   {
     name: 'typescript',
+    icon: 'SiTypescript',
     dot: 'bg-blue-900 dark:bg-blue-800',
     ring: 'focus-visible:ring-blue-800',
     selectedRing: 'ring-4 ring-blue-700/40',
@@ -121,6 +144,7 @@ const palette = [
   // React - Electric Cyan
   {
     name: 'react',
+    icon: 'FaReact',
     dot: 'bg-cyan-600 dark:bg-cyan-500',
     ring: 'focus-visible:ring-cyan-500',
     selectedRing: 'ring-4 ring-cyan-400/40',
@@ -135,6 +159,7 @@ const palette = [
   // Python - Forest Green
   {
     name: 'python',
+    icon: 'FaPython',
     dot: 'bg-green-700 dark:bg-green-600',
     ring: 'focus-visible:ring-green-600',
     selectedRing: 'ring-4 ring-green-500/40',
@@ -149,6 +174,7 @@ const palette = [
   // Docker - Midnight Blue
   {
     name: 'docker',
+    icon: 'FaDocker',
     dot: 'bg-blue-950 dark:bg-blue-900',
     ring: 'focus-visible:ring-blue-900',
     selectedRing: 'ring-4 ring-blue-800/40',
@@ -163,6 +189,7 @@ const palette = [
   // Kubernetes - Imperial Purple
   {
     name: 'kubernetes',
+    icon: 'SiKubernetes',
     dot: 'bg-purple-800 dark:bg-purple-700',
     ring: 'focus-visible:ring-purple-700',
     selectedRing: 'ring-4 ring-purple-600/40',
@@ -177,6 +204,7 @@ const palette = [
   // GraphQL - Hot Pink
   {
     name: 'graphql',
+    icon: 'FaCode',
     dot: 'bg-pink-700 dark:bg-pink-600',
     ring: 'focus-visible:ring-pink-600',
     selectedRing: 'ring-4 ring-pink-500/40',
@@ -191,6 +219,7 @@ const palette = [
   // PostgreSQL - Deep Teal
   {
     name: 'postgresql',
+    icon: 'FaDatabase',
     dot: 'bg-teal-700 dark:bg-teal-600',
     ring: 'focus-visible:ring-teal-600',
     selectedRing: 'ring-4 ring-teal-500/40',
@@ -205,6 +234,7 @@ const palette = [
   // MySQL - Royal Purple
   {
     name: 'mysql',
+    icon: 'FaDatabase',
     dot: 'bg-purple-700 dark:bg-purple-600',
     ring: 'focus-visible:ring-purple-600',
     selectedRing: 'ring-4 ring-purple-500/40',
@@ -219,6 +249,7 @@ const palette = [
   // Linux - Burnt Orange
   {
     name: 'linux',
+    icon: 'FaCode',
     dot: 'bg-orange-700 dark:bg-orange-600',
     ring: 'focus-visible:ring-orange-600',
     selectedRing: 'ring-4 ring-orange-500/40',
@@ -233,6 +264,7 @@ const palette = [
   // JWT Authentication - Electric Violet
   {
     name: 'jwtauth',
+    icon: 'FaCode',
     dot: 'bg-violet-700 dark:bg-violet-600',
     ring: 'focus-visible:ring-violet-600',
     selectedRing: 'ring-4 ring-violet-500/40',
@@ -370,9 +402,7 @@ const palette = [
     chipBorder: 'border-gray-400/40',
     chipHoverBg: 'hover:bg-gray-600/20 dark:hover:bg-gray-400/30',
   },
-] as const;
-
-export type PaletteEntry = typeof palette[number];
+];
 
 // Map skills to palette entry - assign unique colors to each skill
 const skillToPalette = new Map<string, PaletteEntry>();
@@ -429,13 +459,28 @@ export function getSkillDotClasses(skill: string): string {
 }
 
 export function getSkillRingClass(skill: string): string {
-  return skillToPalette.get(skill)?.ring ?? DEFAULT_RING;
+  if (!skill) return DEFAULT_RING;
+  const normalized = skill.trim().toLowerCase();
+  // First try exact palette entry
+  const byName = palette.find((p) => p.name === normalized || p.name === normalized.replace(/\s+/g, ''));
+  if (byName) return byName.ring ?? DEFAULT_RING;
+  // Try to match by skills.json canonical entries
+  for (const grp of skillsData.groups || []) {
+    for (const item of grp) {
+      if (item.toLowerCase() === normalized) {
+        const found = palette.find((pp) => pp.name === item.toLowerCase());
+        if (found) return found.ring ?? DEFAULT_RING;
+      }
+    }
+  }
+  // Try substring match against palette names
+  for (const p of palette) {
+    if (normalized.includes(p.name)) return p.ring ?? DEFAULT_RING;
+  }
+  return DEFAULT_RING;
 }
 
-export function getSkillSelectedRing(skill: string): string {
-  return skillToPalette.get(skill)?.selectedRing ?? DEFAULT_SELECTED_RING;
-}
-
+// Export helpers for other components that expect specific classes
 export function getSkillBorderStrong(skill: string): string {
   return skillToPalette.get(skill)?.borderStrong ?? DEFAULT_BORDER_STRONG;
 }
@@ -446,6 +491,10 @@ export function getSkillBorderHover(skill: string): string {
 
 export function getSkillBadgeHoverBg(skill: string): string {
   return skillToPalette.get(skill)?.badgeHoverBg ?? DEFAULT_BADGE_HOVER_BG;
+}
+
+export function getSkillSelectedRing(skill: string): string {
+  return skillToPalette.get(skill)?.selectedRing ?? DEFAULT_SELECTED_RING;
 }
 
 export function getSkillChipClasses(skill: string): string {
