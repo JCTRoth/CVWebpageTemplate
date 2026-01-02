@@ -23,7 +23,7 @@ export interface PaletteEntry {
 export const palette: PaletteEntry[] = [
   // .NET Ecosystem - Electric Blue
   {
-    name: 'dotnet',
+    name: '.net',
     icon: 'SiDotnet',
     dot: 'bg-blue-700 dark:bg-blue-600',
     ring: 'focus-visible:ring-blue-600',
@@ -38,7 +38,7 @@ export const palette: PaletteEntry[] = [
   },
   // C# - Royal Blue
   {
-    name: 'csharp',
+    name: 'c#',
     icon: 'SiCsharp',
     dot: 'bg-blue-800 dark:bg-blue-700',
     ring: 'focus-visible:ring-blue-700',
@@ -53,7 +53,7 @@ export const palette: PaletteEntry[] = [
   },
   // ASP.NET - Deep Navy
   {
-    name: 'aspnet',
+    name: 'asp.net',
     icon: 'FaServer',
     dot: 'bg-indigo-800 dark:bg-indigo-700',
     ring: 'focus-visible:ring-indigo-700',
@@ -442,7 +442,7 @@ export const palette: PaletteEntry[] = [
   },
   // CI/CD - Indigo
   {
-    name: 'cicd',
+    name: 'ci/cd',
     icon: 'FaSwatchbook',
     dot: 'bg-indigo-600 dark:bg-indigo-500',
     ring: 'focus-visible:ring-indigo-500',
