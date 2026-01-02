@@ -24,7 +24,7 @@ export const palette: PaletteEntry[] = [
   // .NET Ecosystem - Electric Blue
   {
     name: 'dotnet',
-    icon: 'FaCode',
+    icon: 'SiDotnet',
     dot: 'bg-blue-700 dark:bg-blue-600',
     ring: 'focus-visible:ring-blue-600',
     selectedRing: 'ring-4 ring-blue-500/40',
@@ -204,7 +204,7 @@ export const palette: PaletteEntry[] = [
   // GraphQL - Hot Pink
   {
     name: 'graphql',
-    icon: 'FaCode',
+    icon: 'SiGraphql',
     dot: 'bg-pink-700 dark:bg-pink-600',
     ring: 'focus-visible:ring-pink-600',
     selectedRing: 'ring-4 ring-pink-500/40',
@@ -219,7 +219,7 @@ export const palette: PaletteEntry[] = [
   // PostgreSQL - Deep Teal
   {
     name: 'postgresql',
-    icon: 'FaDatabase',
+    icon: 'SiPostgresql',
     dot: 'bg-teal-700 dark:bg-teal-600',
     ring: 'focus-visible:ring-teal-600',
     selectedRing: 'ring-4 ring-teal-500/40',
@@ -234,7 +234,7 @@ export const palette: PaletteEntry[] = [
   // MySQL - Royal Purple
   {
     name: 'mysql',
-    icon: 'FaDatabase',
+    icon: 'SiMysql',
     dot: 'bg-purple-700 dark:bg-purple-600',
     ring: 'focus-visible:ring-purple-600',
     selectedRing: 'ring-4 ring-purple-500/40',
@@ -249,7 +249,7 @@ export const palette: PaletteEntry[] = [
   // Linux - Burnt Orange
   {
     name: 'linux',
-    icon: 'FaCode',
+    icon: 'FaLinux',
     dot: 'bg-orange-700 dark:bg-orange-600',
     ring: 'focus-visible:ring-orange-600',
     selectedRing: 'ring-4 ring-orange-500/40',
@@ -263,8 +263,8 @@ export const palette: PaletteEntry[] = [
   },
   // JWT Authentication - Electric Violet
   {
-    name: 'jwtauth',
-    icon: 'FaCode',
+    name: 'jwtauthentication',
+    icon: 'FaLock',
     dot: 'bg-violet-700 dark:bg-violet-600',
     ring: 'focus-visible:ring-violet-600',
     selectedRing: 'ring-4 ring-violet-500/40',
@@ -278,7 +278,8 @@ export const palette: PaletteEntry[] = [
   },
   // Tailwind CSS - Ocean Blue
   {
-    name: 'tailwind',
+    name: 'tailwindcss',
+    icon: 'SiTailwindcss',
     dot: 'bg-sky-600 dark:bg-sky-500',
     ring: 'focus-visible:ring-sky-500',
     selectedRing: 'ring-4 ring-sky-400/40',
@@ -293,6 +294,7 @@ export const palette: PaletteEntry[] = [
   // Vite - Electric Lime
   {
     name: 'vite',
+    icon: 'SiVite',
     dot: 'bg-lime-700 dark:bg-lime-600',
     ring: 'focus-visible:ring-lime-600',
     selectedRing: 'ring-4 ring-lime-500/40',
@@ -307,6 +309,7 @@ export const palette: PaletteEntry[] = [
   // Zustand - Emerald Green
   {
     name: 'zustand',
+    icon: 'FaBolt',
     dot: 'bg-emerald-700 dark:bg-emerald-600',
     ring: 'focus-visible:ring-emerald-600',
     selectedRing: 'ring-4 ring-emerald-500/40',
@@ -321,6 +324,7 @@ export const palette: PaletteEntry[] = [
   // SignalR - Magenta
   {
     name: 'signalr',
+    icon: 'FaNetworkWired',
     dot: 'bg-fuchsia-700 dark:bg-fuchsia-600',
     ring: 'focus-visible:ring-fuchsia-600',
     selectedRing: 'ring-4 ring-fuchsia-500/40',
@@ -335,6 +339,7 @@ export const palette: PaletteEntry[] = [
   // AI - Crimson Rose
   {
     name: 'ai',
+    icon: 'FaBrain',
     dot: 'bg-rose-700 dark:bg-rose-600',
     ring: 'focus-visible:ring-rose-600',
     selectedRing: 'ring-4 ring-rose-500/40',
@@ -348,7 +353,8 @@ export const palette: PaletteEntry[] = [
   },
   // Machine Learning - Golden Amber
   {
-    name: 'ml',
+    name: 'machinelearning',
+    icon: 'SiTensorflow',
     dot: 'bg-amber-700 dark:bg-amber-600',
     ring: 'focus-visible:ring-amber-600',
     selectedRing: 'ring-4 ring-amber-500/40',
@@ -362,7 +368,8 @@ export const palette: PaletteEntry[] = [
   },
   // Shell Scripting - Charcoal Gray
   {
-    name: 'shell',
+    name: 'shellscripting',
+    icon: 'FaTerminal',
     dot: 'bg-stone-800 dark:bg-stone-700',
     ring: 'focus-visible:ring-stone-700',
     selectedRing: 'ring-4 ring-stone-600/40',
@@ -376,7 +383,8 @@ export const palette: PaletteEntry[] = [
   },
   // System Administration - Zinc Gray
   {
-    name: 'sysadmin',
+    name: 'systemadministration',
+    icon: 'FaCogs',
     dot: 'bg-zinc-700 dark:bg-zinc-600',
     ring: 'focus-visible:ring-zinc-600',
     selectedRing: 'ring-4 ring-zinc-500/40',
@@ -401,6 +409,66 @@ export const palette: PaletteEntry[] = [
     chipText: 'text-gray-700 dark:text-gray-200',
     chipBorder: 'border-gray-400/40',
     chipHoverBg: 'hover:bg-gray-600/20 dark:hover:bg-gray-400/30',
+  },
+  // Spring - Bright Green
+  {
+    name: 'spring',
+    icon: 'SiSpring',
+    dot: 'bg-green-600 dark:bg-green-500',
+    ring: 'focus-visible:ring-green-500',
+    selectedRing: 'ring-4 ring-green-400/40',
+    borderStrong: '!border-green-700 dark:!border-green-600',
+    borderHover: 'hover:border-green-600 dark:hover:border-green-500',
+    badgeHoverBg: 'hover:bg-green-50/70 dark:hover:bg-slate-700',
+    chipBg: 'bg-green-600/12 dark:bg-green-500/25',
+    chipText: 'text-green-700 dark:text-green-100',
+    chipBorder: 'border-green-400/50',
+    chipHoverBg: 'hover:bg-green-600/25 dark:hover:bg-green-500/35',
+  },
+  // SQLite - Navy Blue
+  {
+    name: 'sqlite',
+    icon: 'SiSqlite',
+    dot: 'bg-blue-800 dark:bg-blue-700',
+    ring: 'focus-visible:ring-blue-700',
+    selectedRing: 'ring-4 ring-blue-600/40',
+    borderStrong: '!border-blue-900 dark:!border-blue-800',
+    borderHover: 'hover:border-blue-800 dark:hover:border-blue-700',
+    badgeHoverBg: 'hover:bg-blue-50/70 dark:hover:bg-slate-700',
+    chipBg: 'bg-blue-800/12 dark:bg-blue-700/25',
+    chipText: 'text-blue-900 dark:text-blue-100',
+    chipBorder: 'border-blue-600/50',
+    chipHoverBg: 'hover:bg-blue-800/25 dark:hover:bg-blue-700/35',
+  },
+  // CI/CD - Indigo
+  {
+    name: 'cicd',
+    icon: 'FaSwatchbook',
+    dot: 'bg-indigo-600 dark:bg-indigo-500',
+    ring: 'focus-visible:ring-indigo-500',
+    selectedRing: 'ring-4 ring-indigo-400/40',
+    borderStrong: '!border-indigo-700 dark:!border-indigo-600',
+    borderHover: 'hover:border-indigo-600 dark:hover:border-indigo-500',
+    badgeHoverBg: 'hover:bg-indigo-50/70 dark:hover:bg-slate-700',
+    chipBg: 'bg-indigo-600/12 dark:bg-indigo-500/25',
+    chipText: 'text-indigo-700 dark:text-indigo-100',
+    chipBorder: 'border-indigo-400/50',
+    chipHoverBg: 'hover:bg-indigo-600/25 dark:hover:bg-indigo-500/35',
+  },
+  // Docker Swarm - Deep Blue
+  {
+    name: 'dockerswarm',
+    icon: 'FaNetworkWired',
+    dot: 'bg-blue-900 dark:bg-blue-800',
+    ring: 'focus-visible:ring-blue-800',
+    selectedRing: 'ring-4 ring-blue-700/40',
+    borderStrong: '!border-blue-950 dark:!border-blue-900',
+    borderHover: 'hover:border-blue-900 dark:hover:border-blue-800',
+    badgeHoverBg: 'hover:bg-blue-50/70 dark:hover:bg-slate-700',
+    chipBg: 'bg-blue-900/12 dark:bg-blue-800/25',
+    chipText: 'text-blue-950 dark:text-blue-100',
+    chipBorder: 'border-blue-700/50',
+    chipHoverBg: 'hover:bg-blue-900/25 dark:hover:bg-blue-800/35',
   },
 ];
 
