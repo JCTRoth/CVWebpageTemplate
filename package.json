@@ -20,6 +20,7 @@
     "update-git-projects": "bash scripts/update-git-projects.sh"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@react-spring/web": "^10.0.3",
     "asciidoctor": "^3.0.4",
     "framer-motion": "^12.23.24",

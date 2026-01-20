@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import projectsData from '../data/projects.json';
 import { loadDocumentation, getMarkdownAssetUrl } from '../utils/markdownLoader';
@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import SkillBadge from '../components/SkillBadge';
 import { useMarkdownComponents } from '../utils/markdownComponents';
+import { useEnsureImageViewerClass } from '../utils/imageViewerRenderers';
 import CodeStats from '../components/CodeStats';
 import clocLanguageMapping from '../data/cloc-mapping.json';
 import useWindowSize from '../hooks/useWindowSize';
@@ -85,6 +86,8 @@ const ProjectDetail: React.FC = () => {
     }, [clocUrl]);
 
     const markdownComponents = useMarkdownComponents(docUrl || '');
+    const contentRef = React.useRef<HTMLDivElement | null>(null);
+    useEnsureImageViewerClass(contentRef);
 
     // Match AllCodeStats behavior: collapsed on small screens, expanded on lg
     const { width } = useWindowSize();
@@ -155,7 +158,10 @@ const ProjectDetail: React.FC = () => {
                                     />
                                 </aside>
 
-                                <div className="order-2 lg:order-1 prose prose-sm sm:prose lg:prose-lg flex-1 dark:prose-invert markdown-wide max-w-full overflow-hidden">
+                                <div
+                                    ref={contentRef}
+                                    className="order-2 lg:order-1 prose prose-sm sm:prose lg:prose-lg flex-1 dark:prose-invert markdown-wide max-w-full overflow-hidden"
+                                >
                                     {loading && <p className="text-[var(--color-text-muted)]">Loading details…</p>}
                                     {!loading && md && (
                                         <ReactMarkdown

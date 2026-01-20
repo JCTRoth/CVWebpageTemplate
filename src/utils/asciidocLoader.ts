@@ -18,7 +18,7 @@ export function convertAsciiDocToHtml(adocContent: string): string {
 
   try {
     // Convert AsciiDoc to HTML using asciidoctor
-    const html = asciidoctor.convert(adocContent, {
+    let html = asciidoctor.convert(adocContent, {
       // Basic options for HTML5 output
       attributes: {
         'showtitle': false,  // Don't show document title as it's already shown in the page header
@@ -32,6 +32,13 @@ export function convertAsciiDocToHtml(adocContent: string): string {
       // HTML5 output
       backend: 'html5',
     });
+    // Ensure images produced by AsciiDoc include the image viewer trigger class
+    try {
+      // Lightweight addition: add class to <img> tags that don't already have it
+      html = String(html).replace(/<img\s+(?![^>]*class=["'][^"']*image-viewer-trigger)/gi, `<img class="image-viewer-trigger" `);
+    } catch (e) {
+      // ignore replacement errors and fall back to original HTML
+    }
 
     return html as string;
   } catch (error) {
