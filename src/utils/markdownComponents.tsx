@@ -24,7 +24,7 @@ import { calculateYearsOfExperience } from './markdownLoader';
 // YearsOfExperience component: renders computed years as text
 function YearsOfExperience(_: any) {
   const yearsStr = calculateYearsOfExperience();
-  const years = parseInt(yearsStr, 10) || 0;
+  const years = parseInt(yearsStr, -1) || 0;
   return <span>{years}</span>;
 }
 

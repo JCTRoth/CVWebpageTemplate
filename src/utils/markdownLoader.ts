@@ -6,7 +6,7 @@
 
 import resumeData from '../data/resume.json';
 
-// Calculate years of experience based on earliest start date in resume
+// Calculate years of experience based on earliest start date in resume (work only)
 export function calculateYearsOfExperience(): string {
   try {
     const dates: Date[] = [];
@@ -14,16 +14,6 @@ export function calculateYearsOfExperience(): string {
       for (const job of resumeData.work) {
         const j: any = job;
         const raw = j.start ?? j.startYear ?? j.from ?? null;
-        if (raw) {
-          const d = parseDateString(String(raw));
-          if (d) dates.push(d);
-        }
-      }
-    }
-    if (resumeData.education) {
-      for (const edu of resumeData.education) {
-        const e: any = edu;
-        const raw = e.start ?? e.startYear ?? e.from ?? null;
         if (raw) {
           const d = parseDateString(String(raw));
           if (d) dates.push(d);
