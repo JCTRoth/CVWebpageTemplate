@@ -1,20 +1,6 @@
 import React from 'react';
-import { 
-  FaCode, 
-  FaDatabase, 
-  FaServer, 
-  FaCloud, 
-  FaRobot, 
-  FaLaptopCode,
-  FaDocker,
-  FaReact,
-  FaPython,
-  FaJava,
-  FaNodeJs
-} from 'react-icons/fa';
-import { SiCsharp, SiJavascript, SiTypescript, SiKubernetes, SiSpring } from 'react-icons/si';
 import { getSkillDotClasses, palette } from '../utils/skillColors';
-import getSkillIconFromKey from '../utils/skillIcons';
+import getSkillIcon from '../utils/skillIcons';
 
 type SkillBadgeProps = {
   children: React.ReactNode;
@@ -25,12 +11,8 @@ type SkillBadgeProps = {
 /**
  * Get appropriate icon for a skill
  */
-function getSkillIcon(skill: string) {
-  const normalized = (skill || '').trim().toLowerCase();
-  // Try palette exact match
-  const byName = palette.find((p) => p.name === normalized || p.name === normalized.replace(/\s+/g, ''));
-  const key = byName?.icon || null;
-  return getSkillIconFromKey(key);
+function getIconForSkill(skill: string) {
+  return getSkillIcon(skill);
 }
 
 /**
@@ -41,7 +23,7 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ children, skill, className }) =
     .map((child) => (typeof child === 'string' ? child : ''))
     .join('')
     .trim();
-  const icon = getSkillIcon(label);
+  const icon = getIconForSkill(label);
   return (
     <span
       className={`inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-600 bg-white/80 dark:bg-slate-700/70 px-3 py-1 text-xs font-semibold text-slate-700 dark:text-slate-100 shadow-sm [box-shadow:inset_0_1px_2px_rgba(0,0,0,0.08)] hover:[box-shadow:inset_0_1px_2px_rgba(0,0,0,0.08),0_2px_6px_-1px_rgba(0,0,0,0.15)] transition-colors ${className ?? ''}`}

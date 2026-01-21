@@ -7,7 +7,6 @@ import skillsData from '../data/skills.json';
  */
 export interface PaletteEntry {
   name: string;
-  icon?: string;
   dot: string;
   ring: string;
   selectedRing?: string;
@@ -24,7 +23,6 @@ export const palette: PaletteEntry[] = [
   // .NET Ecosystem - Electric Blue
   {
     name: '.net',
-    icon: 'SiDotnet',
     dot: 'bg-blue-700 dark:bg-blue-600',
     ring: 'focus-visible:ring-blue-600',
     selectedRing: 'ring-4 ring-blue-500/40',
@@ -39,7 +37,6 @@ export const palette: PaletteEntry[] = [
   // C# - Royal Blue
   {
     name: 'c#',
-    icon: 'SiCsharp',
     dot: 'bg-blue-800 dark:bg-blue-700',
     ring: 'focus-visible:ring-blue-700',
     selectedRing: 'ring-4 ring-blue-600/40',
@@ -54,7 +51,6 @@ export const palette: PaletteEntry[] = [
   // ASP.NET - Deep Navy
   {
     name: 'asp.net',
-    icon: 'FaServer',
     dot: 'bg-indigo-800 dark:bg-indigo-700',
     ring: 'focus-visible:ring-indigo-700',
     selectedRing: 'ring-4 ring-indigo-600/40',
@@ -69,7 +65,6 @@ export const palette: PaletteEntry[] = [
   // Entity Framework - Steel Gray
   {
     name: 'entityframework',
-    icon: 'FaDatabase',
     dot: 'bg-slate-700 dark:bg-slate-600',
     ring: 'focus-visible:ring-slate-600',
     selectedRing: 'ring-4 ring-slate-500/40',
@@ -84,7 +79,6 @@ export const palette: PaletteEntry[] = [
   // Java - Crimson Red
   {
     name: 'java',
-    icon: 'FaJava',
     dot: 'bg-red-700 dark:bg-red-600',
     ring: 'focus-visible:ring-red-600',
     selectedRing: 'ring-4 ring-red-500/40',
@@ -99,7 +93,6 @@ export const palette: PaletteEntry[] = [
   // JavaFX - Scarlet
   {
     name: 'javafx',
-    icon: 'FaJava',
     dot: 'bg-red-800 dark:bg-red-700',
     ring: 'focus-visible:ring-red-700',
     selectedRing: 'ring-4 ring-red-600/40',
@@ -114,7 +107,6 @@ export const palette: PaletteEntry[] = [
   // JavaScript - Golden Amber
   {
     name: 'javascript',
-    icon: 'SiJavascript',
     dot: 'bg-amber-600 dark:bg-amber-500',
     ring: 'focus-visible:ring-amber-500',
     selectedRing: 'ring-4 ring-amber-400/40',
@@ -129,7 +121,6 @@ export const palette: PaletteEntry[] = [
   // TypeScript - Sapphire Blue
   {
     name: 'typescript',
-    icon: 'SiTypescript',
     dot: 'bg-blue-900 dark:bg-blue-800',
     ring: 'focus-visible:ring-blue-800',
     selectedRing: 'ring-4 ring-blue-700/40',
@@ -144,7 +135,6 @@ export const palette: PaletteEntry[] = [
   // React - Electric Cyan
   {
     name: 'react',
-    icon: 'FaReact',
     dot: 'bg-cyan-600 dark:bg-cyan-500',
     ring: 'focus-visible:ring-cyan-500',
     selectedRing: 'ring-4 ring-cyan-400/40',
@@ -159,7 +149,6 @@ export const palette: PaletteEntry[] = [
   // Python - Forest Green
   {
     name: 'python',
-    icon: 'FaPython',
     dot: 'bg-green-700 dark:bg-green-600',
     ring: 'focus-visible:ring-green-600',
     selectedRing: 'ring-4 ring-green-500/40',
@@ -174,7 +163,6 @@ export const palette: PaletteEntry[] = [
   // Docker - Midnight Blue
   {
     name: 'docker',
-    icon: 'FaDocker',
     dot: 'bg-blue-950 dark:bg-blue-900',
     ring: 'focus-visible:ring-blue-900',
     selectedRing: 'ring-4 ring-blue-800/40',
@@ -189,7 +177,6 @@ export const palette: PaletteEntry[] = [
   // Kubernetes - Imperial Purple
   {
     name: 'kubernetes',
-    icon: 'SiKubernetes',
     dot: 'bg-purple-800 dark:bg-purple-700',
     ring: 'focus-visible:ring-purple-700',
     selectedRing: 'ring-4 ring-purple-600/40',
@@ -204,7 +191,6 @@ export const palette: PaletteEntry[] = [
   // GraphQL - Hot Pink
   {
     name: 'graphql',
-    icon: 'SiGraphql',
     dot: 'bg-pink-700 dark:bg-pink-600',
     ring: 'focus-visible:ring-pink-600',
     selectedRing: 'ring-4 ring-pink-500/40',
@@ -219,7 +205,6 @@ export const palette: PaletteEntry[] = [
   // PostgreSQL - Deep Teal
   {
     name: 'postgresql',
-    icon: 'SiPostgresql',
     dot: 'bg-teal-700 dark:bg-teal-600',
     ring: 'focus-visible:ring-teal-600',
     selectedRing: 'ring-4 ring-teal-500/40',
@@ -234,7 +219,6 @@ export const palette: PaletteEntry[] = [
   // MySQL - Royal Purple
   {
     name: 'mysql',
-    icon: 'SiMysql',
     dot: 'bg-purple-700 dark:bg-purple-600',
     ring: 'focus-visible:ring-purple-600',
     selectedRing: 'ring-4 ring-purple-500/40',
@@ -249,7 +233,6 @@ export const palette: PaletteEntry[] = [
   // Linux - Burnt Orange
   {
     name: 'linux',
-    icon: 'FaLinux',
     dot: 'bg-orange-700 dark:bg-orange-600',
     ring: 'focus-visible:ring-orange-600',
     selectedRing: 'ring-4 ring-orange-500/40',
@@ -264,7 +247,6 @@ export const palette: PaletteEntry[] = [
   // JWT Authentication - Electric Violet
   {
     name: 'jwtauthentication',
-    icon: 'FaLock',
     dot: 'bg-violet-700 dark:bg-violet-600',
     ring: 'focus-visible:ring-violet-600',
     selectedRing: 'ring-4 ring-violet-500/40',
@@ -279,7 +261,6 @@ export const palette: PaletteEntry[] = [
   // Tailwind CSS - Ocean Blue
   {
     name: 'tailwindcss',
-    icon: 'SiTailwindcss',
     dot: 'bg-sky-600 dark:bg-sky-500',
     ring: 'focus-visible:ring-sky-500',
     selectedRing: 'ring-4 ring-sky-400/40',
@@ -294,7 +275,6 @@ export const palette: PaletteEntry[] = [
   // Vite - Electric Lime
   {
     name: 'vite',
-    icon: 'SiVite',
     dot: 'bg-lime-700 dark:bg-lime-600',
     ring: 'focus-visible:ring-lime-600',
     selectedRing: 'ring-4 ring-lime-500/40',
@@ -309,7 +289,6 @@ export const palette: PaletteEntry[] = [
   // Zustand - Emerald Green
   {
     name: 'zustand',
-    icon: 'FaBolt',
     dot: 'bg-emerald-700 dark:bg-emerald-600',
     ring: 'focus-visible:ring-emerald-600',
     selectedRing: 'ring-4 ring-emerald-500/40',
@@ -324,7 +303,6 @@ export const palette: PaletteEntry[] = [
   // SignalR - Magenta
   {
     name: 'signalr',
-    icon: 'FaNetworkWired',
     dot: 'bg-fuchsia-700 dark:bg-fuchsia-600',
     ring: 'focus-visible:ring-fuchsia-600',
     selectedRing: 'ring-4 ring-fuchsia-500/40',
@@ -339,7 +317,6 @@ export const palette: PaletteEntry[] = [
   // AI - Crimson Rose
   {
     name: 'ai',
-    icon: 'FaBrain',
     dot: 'bg-rose-700 dark:bg-rose-600',
     ring: 'focus-visible:ring-rose-600',
     selectedRing: 'ring-4 ring-rose-500/40',
@@ -354,7 +331,6 @@ export const palette: PaletteEntry[] = [
   // Machine Learning - Golden Amber
   {
     name: 'machinelearning',
-    icon: 'SiTensorflow',
     dot: 'bg-amber-700 dark:bg-amber-600',
     ring: 'focus-visible:ring-amber-600',
     selectedRing: 'ring-4 ring-amber-500/40',
@@ -369,7 +345,6 @@ export const palette: PaletteEntry[] = [
   // Shell Scripting - Charcoal Gray
   {
     name: 'shellscripting',
-    icon: 'FaTerminal',
     dot: 'bg-stone-800 dark:bg-stone-700',
     ring: 'focus-visible:ring-stone-700',
     selectedRing: 'ring-4 ring-stone-600/40',
@@ -384,7 +359,6 @@ export const palette: PaletteEntry[] = [
   // System Administration - Zinc Gray
   {
     name: 'systemadministration',
-    icon: 'FaCogs',
     dot: 'bg-zinc-700 dark:bg-zinc-600',
     ring: 'focus-visible:ring-zinc-600',
     selectedRing: 'ring-4 ring-zinc-500/40',
@@ -413,7 +387,6 @@ export const palette: PaletteEntry[] = [
   // Spring - Bright Green
   {
     name: 'spring',
-    icon: 'SiSpring',
     dot: 'bg-green-600 dark:bg-green-500',
     ring: 'focus-visible:ring-green-500',
     selectedRing: 'ring-4 ring-green-400/40',
@@ -428,7 +401,6 @@ export const palette: PaletteEntry[] = [
   // SQLite - Navy Blue
   {
     name: 'sqlite',
-    icon: 'SiSqlite',
     dot: 'bg-blue-800 dark:bg-blue-700',
     ring: 'focus-visible:ring-blue-700',
     selectedRing: 'ring-4 ring-blue-600/40',
@@ -443,7 +415,6 @@ export const palette: PaletteEntry[] = [
   // CI/CD - Indigo
   {
     name: 'ci/cd',
-    icon: 'FaSwatchbook',
     dot: 'bg-indigo-600 dark:bg-indigo-500',
     ring: 'focus-visible:ring-indigo-500',
     selectedRing: 'ring-4 ring-indigo-400/40',
@@ -458,7 +429,6 @@ export const palette: PaletteEntry[] = [
   // Docker Swarm - Deep Blue
   {
     name: 'dockerswarm',
-    icon: 'FaNetworkWired',
     dot: 'bg-blue-900 dark:bg-blue-800',
     ring: 'focus-visible:ring-blue-800',
     selectedRing: 'ring-4 ring-blue-700/40',
@@ -469,6 +439,20 @@ export const palette: PaletteEntry[] = [
     chipText: 'text-blue-950 dark:text-blue-100',
     chipBorder: 'border-blue-700/50',
     chipHoverBg: 'hover:bg-blue-900/25 dark:hover:bg-blue-800/35',
+  },
+  // ServiceNow - Professional Blue-Gray
+  {
+    name: 'servicenow',
+    dot: 'bg-slate-600 dark:bg-slate-500',
+    ring: 'focus-visible:ring-slate-500',
+    selectedRing: 'ring-4 ring-slate-400/40',
+    borderStrong: '!border-slate-700 dark:!border-slate-600',
+    borderHover: 'hover:border-slate-600 dark:hover:border-slate-500',
+    badgeHoverBg: 'hover:bg-slate-50/70 dark:hover:bg-slate-700',
+    chipBg: 'bg-slate-600/12 dark:bg-slate-500/25',
+    chipText: 'text-slate-700 dark:text-slate-200',
+    chipBorder: 'border-slate-400/50',
+    chipHoverBg: 'hover:bg-slate-600/25 dark:hover:bg-slate-500/35',
   },
 ];
 
