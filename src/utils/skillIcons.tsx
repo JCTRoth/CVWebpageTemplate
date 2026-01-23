@@ -1,10 +1,10 @@
 import React from 'react';
-import { FaCode, FaDatabase, FaServer, FaCloud, FaRobot, FaDocker, FaReact, FaPython, FaJava, FaNodeJs, FaLock, FaNetworkWired, FaLinux, FaCogs, FaTerminal, FaBrain, FaSwatchbook, FaBolt, FaAngular, FaHtml5, FaWordpress } from 'react-icons/fa';
+import { FaCode, FaDatabase, FaServer, FaCloud, FaRobot, FaDocker, FaReact, FaPython, FaJava, FaNodeJs, FaLock, FaNetworkWired, FaLinux, FaCogs, FaTerminal, FaBrain, FaSwatchbook, FaBolt, FaAngular, FaHtml5, FaWordpress, FaUser } from 'react-icons/fa';
 import { SiCsharp, SiJavascript, SiTypescript, SiKubernetes, SiSpring, SiDotnet, SiGraphql, SiPostgresql, SiMysql, SiTailwindcss, SiVite, SiTensorflow, SiShell, SiSqlite, SiGnubash, SiSwagger, SiHibernate, SiGradle, SiGrafana, SiPrometheus, SiGitlab, SiCsswizardry } from 'react-icons/si';
 import { BsBootstrapFill, BsFiletypeXml, BsCloudsFill } from 'react-icons/bs';
 import { GrGraphQl } from 'react-icons/gr';
 import { LuRadioTower } from 'react-icons/lu';
-import { TbBrandPowershell, TbBrandRedux, TbBrandElastic } from 'react-icons/tb';
+import { TbBrandPowershell, TbBrandRedux, TbBrandElastic, TbFileTypeSql } from 'react-icons/tb';
 
 export function getSkillIcon(skill?: string | null) {
   const k = (skill || '').toString().toLowerCase().trim();
@@ -20,6 +20,8 @@ export function getSkillIcon(skill?: string | null) {
       return <SiTypescript className="w-3 h-3 text-black dark:text-white" />;
     case 'kubernetes':
       return <SiKubernetes className="w-3 h-3 text-black dark:text-white" />;
+    case 'servicenow':
+      return <FaUser className="w-3 h-3 text-black dark:text-white" />;
     case 'spring':
       return <SiSpring className="w-3 h-3 text-black dark:text-white" />;
     case 'entityframework':
@@ -73,12 +75,22 @@ export function getSkillIcon(skill?: string | null) {
     case 'shell scripting':
     case 'bash':
     case 'shell':
+    case 'bourne again shell':
+    case 'bourne-again-shell':
+    case 'bourne again':
+    case 'bourne-again':
+    case 'batch':
+    case 'dos':
+    case 'dos batch':
+    case 'windows batch':
       return <SiGnubash className="w-3 h-3 text-black dark:text-white" />;
     case 'systemadministration':
     case 'system administration':
       return <FaCogs className="w-3 h-3 text-black dark:text-white" />;
     case 'sqlite':
       return <SiSqlite className="w-3 h-3 text-black dark:text-white" />;
+    case 'sql':
+      return <TbFileTypeSql className="w-3 h-3 text-black dark:text-white" />;
     case 'ci/cd':
     case 'ci':
     case 'cd':
