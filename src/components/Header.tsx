@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaHome, FaProjectDiagram, FaUser, FaFileAlt } from 'react-icons/fa';
+import { FaHome, FaProjectDiagram, FaUser } from 'react-icons/fa';
 
 const Header: React.FC = () => {
     return (
@@ -33,11 +33,7 @@ const Header: React.FC = () => {
                                 <FaUser /> <span>About</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink className={({isActive}) => `hover:underline inline-flex items-center gap-2 ${isActive ? 'font-semibold' : ''}`} to="/resume">
-                                <FaFileAlt /> <span>Resume</span>
-                            </NavLink>
-                        </li>
+
                     </ul>
                 </nav>
             </div>
